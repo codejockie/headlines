@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Source extends Component {
     render() {
@@ -7,13 +8,15 @@ class Source extends Component {
         return (
             <div className="item">
                 <div className="menu">
-                    <a className="item news-item" href={`/news/${id}`}>
+                    <div className="item news-item">
                           <span className="side-news-item">
                             <span className="side-news-item">
-                                {name}
+                                <Link to={`/news/${id}`} activeClassName="active">
+                                    {name}
+                                </Link>
                             </span>
                           </span>
-                    </a>
+                    </div>
                 </div>
             </div>
         );

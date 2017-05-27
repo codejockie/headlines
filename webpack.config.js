@@ -1,4 +1,10 @@
-var webpack = require('webpack');
+let path = require('path');
+let webpack = require('webpack');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+let extractPlugin = new ExtractTextPlugin({
+    filename: 'main.css'
+});
 
 module.exports = {
     entry: [
@@ -8,31 +14,48 @@ module.exports = {
     externals: {
         jquery: 'jQuery'
     },
+    output: {
+        path: path.resolve(__dirname, 'client'),
+        filename: 'bundle.js',
+        publicPath: '/client',
+        sourceMapFilename: 'bundle.map'
+    },
+    devtool: '#source-map',
+    resolve: {
+        modules: ['node_modules', './app/components'],
+        extensions: ['.js', '.jsx']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: ['react', 'es2015', 'stage-0']
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }
+            // {
+            //     test: /\.scss$/,
+            //     use: extractPlugin.extract({
+            //         use: ['style-loader', 'css-loader', 'sass-loader']
+            //     })
+            // }
+        ]
+    },
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
             'jQuery': 'jquery'
-        })
-    ],
-    output: {
-        path: __dirname,
-        filename: './client/bundle.js'
-    },
-    resolve: {
-        modules: ['node_modules', './app/components'],
-        alias: {},
-        extensions: ['.js', '.jsx']
-    },
-    module: {
-        loaders: [
-            {
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015', 'stage-0']
-                },
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/
-            }
-        ]
-    }
+        }),
+        // extractPlugin
+    ]
 };

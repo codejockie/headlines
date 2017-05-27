@@ -23,18 +23,25 @@ class Sidebar extends Component {
     render() {
         const {sources} = this.state;
 
-        const renderSources = () => {
-            return sources.map(source => {
-                return <Source key={source.id} {...source}/>
-            });
-        };
+        // const renderSources = () => {
+        //     return sources.map(source => {
+        //         return <Source key={source.id} {...source}/>
+        //     });
+        // };
         return (
             <div className="sidebar-container">
                 <div className="ui container visible fixed inverted left vertical sidebar menu">
                     <div className="item">
                         <div className="header">News sources</div>
                     </div>
-                    {renderSources()}
+                    {sources ? (
+                        sources.map(source => {
+                            return <Source key={source.id} {...source}>
+
+                            </Source>
+                        })) : (
+                        <div>Loading...</div>
+                    )}
                 </div>
             </div>
         );
