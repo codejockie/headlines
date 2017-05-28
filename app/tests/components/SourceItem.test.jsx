@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
-import $ from 'jQuery';
 import ReactTestUtils from 'react-dom/test-utils';
 
 import SourceItem from 'SourceItem';
@@ -32,10 +31,9 @@ describe('SourceItem', () => {
         ],
       };
       const source = ReactTestUtils.renderIntoDocument(<Router><SourceItem {...sources} /></Router>);
-      const $el = $(ReactDOM.findDOMNode(source));
-      const actualText = $el.find('a').text();
+      const anchorText = findDOMNode(source).querySelector('a');
 
-      expect(actualText).toBe('ABC News (AU)');
+      expect(anchorText.textContent).toEqual('ABC News (AU)');
     });
   });
 });
