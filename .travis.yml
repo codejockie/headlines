@@ -1,4 +1,7 @@
 language: node_js
 node_js:
-  - "7"
-after_success: npm run coverage
+- '7'
+after_script: cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+env:
+  global:
+    secure: mr+f1+aEV6TtbJz/l/jD4ygj0BmgdEs9DXmIMcT8NwUlWfosKPHpIet75PoDBalvJJNkxm9lemWK83+hFUo42aL/oL+cWuLk7YF7aioVnioZSa421H/rhe9utohiYW4pPrClRuyg8JUzdWE/7yQRRV4F1J28jsBkW9CuIioe0r6vquwf8jtmPIwZVwoGauTvSrBvIusDCe9PIC8NjT5PiAqWH7GClA5msGD3Wr/ourntUmwKevnZLFV2gRatBLMt+2RSo1EZAgRCngwh3fGb2e4ZE6XkFUwxDShGPh/msbbwyNZ5+s+vCk54rEJGrmzrugM/trnMErCtckKBZvXx65Y91C6uu9zUB/71vIWn1Ge13gjKVENAKn0hbbvFQFflVRSM6WIkBr6z7jMqQ5PR7MkGvu1dGOFHUm4UcNRiqSK/MVvkHT70GCv1+f8dVC+7pdFDFzI4hU04IlpuRM1KG/mArmKp8JoeMkUcMbX2WqvUj8CXWaxRFieYlDMMA+o25EP7YujC+KkUXSPjWEn9FSV7UfMDjMW/vZBf4BtaECoAXJlEmwMIgzBls8W4YzYvdztAXS2d6S48uQux+rk0WTrZn+SBiAC4mrQW9fLDcZLOqrCnEHHRzZfQwWKp03DqYJyix24Q9HXIKHJNNmm0xZXamVTohoZFmMHNGgMYDCw=

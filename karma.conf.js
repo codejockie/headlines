@@ -9,7 +9,11 @@ module.exports = function (config) {
     preprocessors: {
       'app/tests/**/*.test.jsx': ['webpack', 'sourcemap']
     },
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha', 'coverage', 'coveralls'],
+    coverageReporter: {
+      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      dir: 'coverage/'
+    },
     client: {
       mocha: {
         timeout: '5000'
