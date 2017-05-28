@@ -1,0 +1,17 @@
+/* Mobile */
+.pusher {
+  margin-left: $margin;
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .pusher {
+    margin-left: $margin + 20;
+  }
+}
+
+@media only screen and (min-width: 991px) {
+  .pusher {
+    margin-left: $margin + 180;
+  }
+}

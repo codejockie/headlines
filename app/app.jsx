@@ -1,11 +1,13 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 
-import Headlines from './components/Headlines';
+import App from './components/App';
+
+import './styles/app.scss';
 
 render(
-    <div>
-        <Headlines />
-    </div>,
-    document.querySelector('#app')
+  <div>
+    <App />
+  </div>,
+  document.querySelector('#app')
 );
