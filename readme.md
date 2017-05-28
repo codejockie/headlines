@@ -1,5 +1,5 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/codejockie/headlines)
-[![Coverage Status](https://coveralls.io/repos/github/codejockie/headlines/badge.svg?branch=master)](https://coveralls.io/github/codejockie/headlines?branch=master)
+[![Build Status](https://travis-ci.org/codejockie/headlines.svg?branch=master)](https://travis-ci.org/codejockie/headlines)
 
 # Headlines
 This repository contains a working version of a news app developed with React and Express.
