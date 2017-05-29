@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {getHeadlines} from '../api/NewsAPI';
-import {HeadlineItem} from 'HeadlineItem';
+import * as api from '../api/NewsAPI';
+import HeadlineItem from 'HeadlineItem';
 
 class Headline extends React.Component {
   constructor(props) {
@@ -13,28 +13,35 @@ class Headline extends React.Component {
 
     if (props.match.params) {
       this.sourceKey = props.match.params.sourceKey;
+      this.getHeadlines(this.sourceKey);
     }
-
-    getHeadlines(this.sourceKey).then((headlines) => {
-      this.setState({headlines});
-    }, (errorMessage) => {
-      alert(errorMessage);
-    });
   }
 
-  // componentDidMount() {
-  //     getHeadlines(this.sourceKey).then((headlines) => {
-  //         this.setState({headlines});
-  //     }, (errorMessage) => {
-  //         alert(errorMessage);
-  //     });
-  // }
+  componentDidMount() {
+    this.getHeadlines();
+  }
+
+  componentWillReceiveProps({match}) {
+    const sourceKey = match.params.sourceKey;
+    this.getHeadlines(sourceKey);
+  }
+
+  getHeadlines(sourceKey = '') {
+    if (sourceKey) {
+      api.getHeadlines(sourceKey).then(articles => {
+        this.setState({ headlines: articles });
+      }, error => {
+        console.log(error);
+        this.setState({ headlines: [] });
+      });
+    }
+  }
 
   render() {
-    const {headlines} = this.state;
+    const { headlines } = this.state;
 
     return (
-      <div className="ui divided items">
+      <div className="ui link cards">
         {
           headlines
             ? headlines.map((article, i) => <HeadlineItem key={i} {...article}/>)

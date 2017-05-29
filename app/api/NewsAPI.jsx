@@ -3,24 +3,26 @@ import axios from 'axios';
 const BASE_URL = ' https://newsapi.org';
 const API_KEY = '213327409d384371851777e7c7f78dfe';
 
-const getSources = () => {
-  const requestUrl = `${BASE_URL}/v1/sources?language=en`;
+export const getSources = () => {
+  const path = 'sources';
 
-  return axios.get(requestUrl).then((res) => {
-    return res.data.sources;
-  }, (res) => {
-    throw new Error(res.data.message);
-  });
+  return makeRequest(path)
+    .then(data => {
+      return data.sources;
+    }, error => {
+      return error;
+    });
 };
 
-const getHeadlines = (sourceKey = 'reddit-r-all') => {
-  const requestUrl = `${BASE_URL}/v1/articles?source=${sourceKey}&apiKey=${API_KEY}`;
+export const getHeadlines = (sourceKey = 'reddit-r-all') => {
+  const path = 'articles';
 
-  return axios.get(requestUrl).then((res) => {
-    return res.data.articles;
-  }, (res) => {
-    throw new Error(res.data.message);
-  });
+  return makeRequest(path, sourceKey)
+    .then(data => {
+      return data.articles;
+    }, error => {
+      return error;
+    });
 };
 
 const makeRequest = (path, sourceKey = '') => {
@@ -32,14 +34,10 @@ const makeRequest = (path, sourceKey = '') => {
     requestUrl += `${path}?language=en`;
   }
 
-  return axios.get(requestUrl).then((res) => {
-    return res.data;
-  }, (res) => {
-    throw new Error(res.data.message);
-  });
+  return axios.get(requestUrl)
+    .then((res) => {
+      return res.data;
+    }, (res) => {
+      throw new Error(res.data.message);
+    });
 };
-
-export {
-  getSources,
-  getHeadlines
-}

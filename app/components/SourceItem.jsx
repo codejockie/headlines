@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class SourceItem extends Component {
   render() {
@@ -11,9 +11,9 @@ class SourceItem extends Component {
           <div className="item news-item">
 						<span className="side-news-item">
 							<span className="side-news-item">
-									<Link to={`/news/${id}`}>
+									<NavLink to={`/news/${id}`} activeClassName="active">
 											{name}
-									</Link>
+									</NavLink>
 							</span>
 						</span>
           </div>
