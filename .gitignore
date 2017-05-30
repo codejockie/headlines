@@ -1,5 +1,9 @@
 node_modules/
 .idea/
 coverage/
+<<<<<<< HEAD
+=======
+client/bundle.js
+>>>>>>> feature
 config/
 yarn.lock

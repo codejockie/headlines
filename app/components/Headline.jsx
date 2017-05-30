@@ -1,7 +1,8 @@
 import React from 'react';
 
-import * as api from '../api/NewsAPI';
 import HeadlineItem from 'HeadlineItem';
+import * as HeadlineActions from '../actions/HeadlineActions';
+import HeadlineStore from '../stores/HeadlineStore';
 
 class Headline extends React.Component {
   constructor(props) {
@@ -10,31 +11,15 @@ class Headline extends React.Component {
     this.state = {
       headlines: []
     };
-
-    if (props.match.params) {
-      this.sourceKey = props.match.params.sourceKey;
-      this.getHeadlines(this.sourceKey);
-    }
   }
 
-  componentDidMount() {
-    this.getHeadlines();
-  }
-
-  componentWillReceiveProps({match}) {
-    const sourceKey = match.params.sourceKey;
-    this.getHeadlines(sourceKey);
-  }
-
-  getHeadlines(sourceKey = '') {
-    if (sourceKey) {
-      api.getHeadlines(sourceKey).then(articles => {
-        this.setState({ headlines: articles });
-      }, error => {
-        console.log(error);
-        this.setState({ headlines: [] });
-      });
-    }
+  componentWillMount() {
+    HeadlineActions.loadHeadlines();
+    HeadlineStore.on('headlinechange', () => {
+      this.setState({
+        headlines: HeadlineStore.getAll()
+      })
+    })
   }
 
   render() {
@@ -44,8 +29,8 @@ class Headline extends React.Component {
       <div className="ui link cards">
         {
           headlines
-            ? headlines.map((article, i) => <HeadlineItem key={i} {...article}/>)
-            : <div>Loading...</div>
+            ? headlines.map((article, i) => <HeadlineItem key={i} {...article} />)
+            : <div><i className="icon active loader centered"></i>Loading...</div>
         }
       </div>
     );
