@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 
 import Sidebar from 'Sidebar';
 import Headline from 'Headline';
@@ -29,7 +28,7 @@ class App extends Component {
             </div>
           </div>
           <div className="main ui container">
-            <Route path="/news/:sourceKey" component={Headline} />
+            <Headline />
           </div>
         </div>
       </div>

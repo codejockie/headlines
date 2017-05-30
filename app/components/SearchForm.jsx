@@ -1,6 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  searchVisible: PropTypes.bool,
+  onSubmit: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  searchVisible: false,
+  onSubmit: () => {},
+};
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -37,14 +47,8 @@ class SearchForm extends React.Component {
   }
 }
 
-SearchForm.propTypes = {
-  searchVisible: PropTypes.bool,
-  onSubmit: PropTypes.func.isRequired
-};
+SearchForm.propTypes = propTypes;
 
-SearchForm.defaultProps = {
-  searchVisible: false,
-  onSubmit: () => {}
-};
+SearchForm.defaultProps = defaultProps;
 
 export default SearchForm;

@@ -4,5 +4,18 @@
     "react",
     "jsx-a11y",
     "import"
-  ]
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "es6": true
+  },
+  "rules": {
+    "linebreak-style": [
+      "warn",
+      "unix"
+    ]
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
-const HeadlineItem = ({title, description, url, urlToImage, publishedAt}) => {
+function HeadlineItem({title, description, url, urlToImage, publishedAt}) {
   return (
     <div className="card">
       <a className="image" href={url} target="_blank">
@@ -14,7 +15,7 @@ const HeadlineItem = ({title, description, url, urlToImage, publishedAt}) => {
       </div>
       <div className="extra content">
         <span className="right floated">
-          {publishedAt}
+          {formatDate(publishedAt)}
         </span>
         <span>
           <i className="favorite icon"></i>
@@ -22,6 +23,14 @@ const HeadlineItem = ({title, description, url, urlToImage, publishedAt}) => {
       </div>
     </div>
   )
-};
+}
 
 export default HeadlineItem;
+
+export const formatDate = (date) => {
+  if (date) {
+    return moment(date).format('ddd, MMM Do YYYY, h:mm:ss a');
+  } else {
+    return '';
+  }
+};
