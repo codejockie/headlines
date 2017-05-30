@@ -41,11 +41,7 @@ class Sidebar extends Component {
   }
 
   handleClick(sourceId) {
-    // const { sources } = this.state;
     HeadlineActions.loadHeadlines(sourceId);
-    // this.setState({
-    //   sources
-    // })
   }
 
   render() {
@@ -53,7 +49,7 @@ class Sidebar extends Component {
 
     return (
       <div className="sidebar-container">
-        <div className="ui container visible teal fixed inverted left vertical sidebar menu">
+        <div className="ui container visible fixed inverted blue left vertical sidebar menu">
           <div className="ui icon input large" onClick={this.showSearch}>
             <SearchForm searchVisible={this.state.searchVisible}
                         onSubmit={this.handleSearch}

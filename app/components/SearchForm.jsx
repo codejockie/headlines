@@ -39,7 +39,7 @@ class SearchForm extends React.Component {
 
     return (
       <form onSubmit={this.submitForm.bind(this)}>
-        <input type="search" className={searchInputClasses}
+        <input type="search" className={searchInputClasses.join(' ')}
         onChange={this.updateSearchInput.bind(this)}
         placeholder="Search..." />
       </form>
