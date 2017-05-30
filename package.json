@@ -53,6 +53,7 @@
     "webpack": "^2.6.0"
   },
   "devDependencies": {
+    "babel-plugin-__coverage__": "^11.0.0",
     "babel-register": "^6.24.1",
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
@@ -79,5 +80,9 @@
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
     "webpack-dev-server": "^2.4.5"
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   }
 }

@@ -5,13 +5,16 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     singleRun: true,
     frameworks: ['mocha'],
-    files: ['app/tests/**/*.test.jsx'],
+    files: [
+      'app/components/*.jsx',
+      'app/tests/**/*.test.jsx'
+    ],
     preprocessors: {
       'app/tests/**/*.test.jsx': ['webpack', 'sourcemap']
     },
     reporters: ['mocha', 'coverage', 'coveralls'],
     coverageReporter: {
-      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      type: 'lcov',
       dir: 'coverage/'
     },
     client: {
