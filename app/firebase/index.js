@@ -2,12 +2,12 @@ import firebase from 'firebase';
 
 try {
   const config = {
-    apiKey: 'AIzaSyAN7g-9rEEUO6CXOX6aY6ua6Z3Mcr3wdhc',
-    authDomain: 'headlines-9b423.firebaseapp.com',
-    databaseURL: 'https://headlines-9b423.firebaseio.com',
-    projectId: 'headlines-9b423',
-    storageBucket: 'headlines-9b423.appspot.com',
-    messagingSenderId: '215630532516',
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
   };
 
   firebase.initializeApp(config);
