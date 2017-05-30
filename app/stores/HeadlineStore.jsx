@@ -15,7 +15,7 @@ class HeadlineStore extends EventEmitter {
 
   getHeadlines(headlines) {
     this.headlines = headlines;
-    this.emit('change');
+    this.emit('headlinechange');
   }
 
   handleActions(action) {

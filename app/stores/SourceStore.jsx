@@ -15,13 +15,13 @@ class SourceStore extends EventEmitter {
 
   getSources(sources) {
     this.sources = sources;
-    this.emit('change');
+    this.emit('sourcechange');
   }
 
   handleActions(action) {
     switch (action.type) {
       case 'LOAD_SOURCES': {
-        this.getSources();
+        // handle this
       }
         break;
       case 'RECEIVE_SOURCES': {

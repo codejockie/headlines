@@ -15,7 +15,7 @@ class Headline extends React.Component {
 
   componentWillMount() {
     HeadlineActions.loadHeadlines();
-    HeadlineStore.on('change', () => {
+    HeadlineStore.on('headlinechange', () => {
       this.setState({
         headlines: HeadlineStore.getAll()
       })
@@ -30,7 +30,7 @@ class Headline extends React.Component {
         {
           headlines
             ? headlines.map((article, i) => <HeadlineItem key={i} {...article} />)
-            : <div>Loading...</div>
+            : <div><i className="icon active loader centered"></i>Loading...</div>
         }
       </div>
     );

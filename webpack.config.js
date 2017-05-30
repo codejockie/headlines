@@ -1,10 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractPlugin = new ExtractTextPlugin({
-  filename: 'main.css',
-});
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
   entry: [
@@ -20,7 +17,7 @@ module.exports = {
     publicPath: '/client',
     sourceMapFilename: 'bundle.map',
   },
-  devtool: '#source-map',
+  devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map',
   resolve: {
     modules: ['node_modules', './app/components'],
     extensions: ['.js', '.jsx'],
@@ -43,12 +40,6 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      // {
-      //     test: /\.scss$/,
-      //     use: extractPlugin.extract({
-      //         use: ['style-loader', 'css-loader', 'sass-loader']
-      //     })
-      // }
     ],
   },
   plugins: [
@@ -56,6 +47,10 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
     }),
-    // extractPlugin
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    }),
   ],
 };

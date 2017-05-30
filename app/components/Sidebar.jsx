@@ -23,7 +23,7 @@ class Sidebar extends Component {
   }
 
   componentWillMount() {
-    SourceStore.on('change', () => {
+    SourceStore.on('sourcechange', () => {
       this.setState({
         sources: SourceStore.getAll()
       })
@@ -41,11 +41,11 @@ class Sidebar extends Component {
   }
 
   handleClick(sourceId) {
-    const { sources } = this.state;
+    // const { sources } = this.state;
     HeadlineActions.loadHeadlines(sourceId);
-    this.setState({
-      sources
-    })
+    // this.setState({
+    //   sources
+    // })
   }
 
   render() {
@@ -67,7 +67,7 @@ class Sidebar extends Component {
             sources.map(source => {
               return <SourceItem key={source.id} {...source} onClick={this.handleClick} />
             })) : (
-            <div><i className="repeat icon loading"></i></div>
+            <div><i className="icon active loader centered"></i>Loading...</div>
           )}
         </div>
       </div>
