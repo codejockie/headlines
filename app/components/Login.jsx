@@ -11,12 +11,12 @@ export default class Login extends Component {
     return (
       <div className="ui middle center aligned grid">
         <div className="column">
-          <h2 className="ui teal image header">
+          <h2 className="ui blue image header">
             <div className="content">
               Newslines App
             </div>
           </h2>
-          <div className="ui fluid large teal button" onClick={this.onLogin}>
+          <div className="ui fluid large blue button" onClick={this.onLogin}>
             <i className="icon google plus"></i>Login with Google+</div>
         </div>
       </div>

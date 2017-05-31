@@ -1,19 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Route, Router, IndexRoute, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 // import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './components/App';
-import Login from 'Login';
+import firebase from 'firebase/';
+import router from './router/';
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    hashHistory.push('/headlines');
+  } else {
+    hashHistory.push('/');
+  }
+});
 
 import './styles/app.scss';
 
 render(
-  <Router history={hashHistory}>
-    <Route path="/">
-      <Route path="headlines" component={App} />
-      <IndexRoute component={Login} />
-    </Route>
-  </Router>,
+  router,
   document.querySelector('#app')
 );
