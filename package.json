@@ -4,7 +4,7 @@
   "description": "A news headlines app built with React",
   "main": "server.js",
   "scripts": {
-    "test": "nyc karma start",
+    "test": "karma start",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "webpack",
     "start": "npm run build && node server.js"
