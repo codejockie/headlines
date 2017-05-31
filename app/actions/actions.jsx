@@ -6,6 +6,7 @@ export const startLogin = () => {
     .then((result) => {
     dispatcher.dispatch({
       type: 'LOGIN',
+      uid: result.user.uid
     });
     console.log('Auth worked!', result);
     }, (error) => {

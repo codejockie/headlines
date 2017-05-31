@@ -50,7 +50,7 @@ class Sidebar extends Component {
     return (
       <div className="sidebar-container">
         <div className="ui container visible fixed inverted blue left vertical sidebar menu">
-          <div className="ui icon input large" onClick={this.showSearch}>
+          <div className="ui icon input small" onClick={this.showSearch}>
             <SearchForm searchVisible={this.state.searchVisible}
                         onSubmit={this.handleSearch}
             />
