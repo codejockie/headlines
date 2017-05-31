@@ -6,4 +6,5 @@ coverage/
 client/bundle.js
 >>>>>>> feature
 config/
+.nyc_output/
 yarn.lock
