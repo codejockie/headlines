@@ -46,13 +46,12 @@
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.5",
     "script-loader": "^0.7.0",
+    "semantic-ui-react": "^0.68.4",
     "style-loader": "^0.18.1",
     "webpack": "^2.6.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "babel-plugin-__coverage__": "^11.0.0",
-    "babel-register": "^6.24.1",
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -62,7 +61,6 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "eslint-watch": "^3.1.0",
-    "extract-text-webpack-plugin": "^2.1.0",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-coverage": "^1.1.1",
@@ -74,38 +72,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mocha": "^3.4.2",
-    "mocha-lcov-reporter": "^1.3.0",
     "npm-run-all": "^4.0.2",
-    "nyc": "^10.3.2",
     "webpack-dev-server": "^2.4.5"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
-    "include": [
-      "app/components/*.jsx"
-    ],
-    "exclude": [
-      "app/tests/*.test.jsx"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "require": [
-      "babel-plugin-__coverage__",
-      "babel-register",
-      "mocha"
-    ],
-    "extension": [
-      ".jsx",
-      ".es6"
-    ],
-    "cache": true,
-    "all": true,
-    "report-dir": ".nyc_output"
   }
 }

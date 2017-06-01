@@ -1,27 +1,22 @@
 import React from 'react';
+import { Card, Icon } from 'semantic-ui-react';
 import moment from 'moment';
+
+const extra = (
+  <Icon name='heart' />
+);
 
 function HeadlineItem({title, description, url, urlToImage, publishedAt}) {
   return (
-    <div className="card">
-      <a className="image" href={url} target="_blank">
-        <img src={urlToImage}/>
-      </a>
-      <div className="content">
-        <div className="header">{title}</div>
-        <div className="description">
-          {description}
-        </div>
-      </div>
-      <div className="extra content">
-        <span className="right floated">
-          {formatDate(publishedAt)}
-        </span>
-        <span>
-          <i className="favorite icon"></i>
-      </span>
-      </div>
-    </div>
+    <Card
+      color='blue'
+      href={url}
+      image={urlToImage}
+      header={title}
+      meta={formatDate(publishedAt)}
+      description={description}
+      extra={extra}
+    />
   )
 }
 

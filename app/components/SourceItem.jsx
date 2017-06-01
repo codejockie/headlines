@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 class SourceItem extends Component {
   constructor(props){
@@ -18,17 +19,11 @@ class SourceItem extends Component {
     const { name, id } = this.props;
 
     return (
-      <div className="item">
-        <div className="menu">
-          <div className="item news-item">
-            <span className="side-news-item">
-              <a href={`${id}`} onClick={this.onClick}>
-                  {name}
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
+      <Menu.Item name={name}>
+        <a href={`${id}`} onClick={this.onClick}>
+          {name}
+        </a>
+      </Menu.Item>
     );
   }
 }

@@ -10,7 +10,7 @@ try {
 
 module.exports = {
   entry: [
-    'script-loader!jquery/dist/jquery.min.js',
+    // 'script-loader!jquery/dist/jquery.min.js',
     './app/app.jsx',
   ],
   externals: {

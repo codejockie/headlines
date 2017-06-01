@@ -14,10 +14,10 @@ export const getSources = () => {
     });
 };
 
-export const getHeadlines = (sourceKey = 'reddit-r-all') => {
+export const getHeadlines = (sourceKey = 'reddit-r-all', sortBy = 'top') => {
   const path = 'articles';
 
-  return makeRequest(path, sourceKey)
+  return makeRequest(path, sourceKey, sortBy)
     .then(data => {
       return data.articles;
     }, error => {
@@ -25,11 +25,13 @@ export const getHeadlines = (sourceKey = 'reddit-r-all') => {
     });
 };
 
-const makeRequest = (path, sourceKey = '') => {
+const makeRequest = (path, sourceKey = '', sortBy = '') => {
   let requestUrl = `${BASE_URL}/v1/`;
 
-  if (sourceKey) {
-    requestUrl += `${path}?source=${sourceKey}&apiKey=${API_KEY}`;
+  // https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey={API_KEY}
+
+  if (sourceKey && sortBy) {
+    requestUrl += `${path}?source=${sourceKey}&sortBy=${sortBy}&apiKey=${API_KEY}`;
   } else {
     requestUrl += `${path}?language=en`;
   }
@@ -38,6 +40,10 @@ const makeRequest = (path, sourceKey = '') => {
     .then((res) => {
       return res.data;
     }, (res) => {
-      throw new Error(res.data.message);
+      return {
+        status: res.data.status,
+        code: res.data.code,
+        message: res.data.message,
+      }
     });
 };

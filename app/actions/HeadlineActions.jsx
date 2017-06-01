@@ -1,20 +1,16 @@
 import dispatcher from '../dispatcher';
 import * as api from '../api/NewsAPI';
 
-export function loadHeadlines(sourceKey = '') {
-  dispatcher.dispatch({
-    type: 'LOAD_SOURCES',
-  });
-
-  if (sourceKey) {
-    api.getHeadlines(sourceKey).then(headlines => {
+export function loadHeadlines(sourceKey = '', sortBy = 'top') {
+  if (sourceKey && sortBy) {
+    api.getHeadlines(sourceKey, sortBy).then(headlines => {
       dispatcher.dispatch({
         type: 'RECEIVE_HEADLINES',
         headlines
-      }, err => {
+      }, error => {
         dispatcher.dispatch({
           type: 'RECEIVE_HEADLINES_ERROR',
-          headlines: err
+          error
         })
       })
     })
@@ -23,10 +19,10 @@ export function loadHeadlines(sourceKey = '') {
       dispatcher.dispatch({
         type: 'RECEIVE_HEADLINES',
         headlines
-      }, err => {
+      }, error => {
         dispatcher.dispatch({
           type: 'RECEIVE_HEADLINES_ERROR',
-          headlines: err
+          error
         })
       })
     })

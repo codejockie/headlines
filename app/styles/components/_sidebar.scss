@@ -1,17 +1,17 @@
 /* Mobile */
 .pusher {
-  margin-left: $margin + 70;
+  margin-left: $margin - 70;
 }
 
 /* Tablet */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .pusher {
-    margin-left: $margin + 20;
+    margin-left: $margin - 70;
   }
 }
 
 @media only screen and (min-width: 991px) {
   .pusher {
-    margin-left: $margin + 180;
+    margin-left: $margin - 130;
   }
 }

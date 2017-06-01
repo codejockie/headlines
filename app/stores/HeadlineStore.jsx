@@ -7,6 +7,7 @@ class HeadlineStore extends EventEmitter {
     super();
 
     this.headlines = [];
+    this.error = {};
   }
 
   getAll() {
@@ -15,13 +16,18 @@ class HeadlineStore extends EventEmitter {
 
   getHeadlines(headlines) {
     this.headlines = headlines;
-    this.emit('headlinechange');
+    this.emit('headline_change');
+  }
+
+  getErrors(error) {
+    this.error = error;
+    this.emit('error');
   }
 
   handleActions(action) {
     switch (action.type) {
-      case 'LOAD_HEADLINES': {
-        // handle this
+      case 'RECEIVE_HEADLINES_ERROR': {
+        this.getErrors(action.error);
       }
         break;
       case 'RECEIVE_HEADLINES': {
