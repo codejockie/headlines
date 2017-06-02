@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - '7'
+before_install:
+  - "exportDISPLAY=:99.0"
+  - "sh-e/etc/init.d/xvfbstart"
 after_script: cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 env:
   global:

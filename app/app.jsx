@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { hashHistory } from 'react-router';
-// import { BrowserRouter as Router } from 'react-router-dom';
 
 import firebase from 'firebase/';
 import router from './router/';

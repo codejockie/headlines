@@ -5,8 +5,10 @@ const envFile = require('node-env-file');
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 try {
-  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
-} catch (e) {}
+  envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
+} catch (e) {
+  /**/
+}
 
 module.exports = {
   entry: [
@@ -54,8 +56,8 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false
-      }
+        warnings: false,
+      },
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -66,7 +68,7 @@ module.exports = {
         PROJECT_ID: JSON.stringify(process.env.PROJECT_ID),
         STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET),
         MESSAGING_SENDER_ID: JSON.stringify(process.env.MESSAGING_SENDER_ID),
-      }
+      },
     }),
   ],
 };
