@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 
 import App from 'App';
+import Article from 'Article';
 import firebase from '../firebase/';
 import Login from 'Login';
 
@@ -23,6 +24,7 @@ export default (
   <Router history={hashHistory}>
     <Route path="/">
       <Route path="headlines" component={App} onEnter={requireLogin} />
+      <Route path="article" component={Article} onEnter={requireLogin} />
       <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
     </Route>
   </Router>

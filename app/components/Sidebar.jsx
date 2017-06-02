@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
 
+import * as actions from '../actions/actions';
 import Headline from 'Headline';
 import * as HeadlineActions from '../actions/HeadlineActions';
+import * as SourceActions from '../actions/SourceActions';
 import SourceItem from 'SourceItem';
 import SourceStore from '../stores/SourceStore';
-import * as SourceActions from '../actions/SourceActions';
 
 const options = [
   {
@@ -37,6 +38,7 @@ class SourceSidebar extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onLogout = this.onLogout.bind(this);
 
     this.state = {
       sources: SourceStore.getAll(),
@@ -49,7 +51,7 @@ class SourceSidebar extends Component {
   }
 
   componentWillMount() {
-    SourceStore.on('sourcechange', () => {
+    SourceStore.on('source_change', () => {
       this.setState({
         sources: SourceStore.getAll(),
       })
@@ -69,7 +71,6 @@ class SourceSidebar extends Component {
 
   handleClick(sourceId) {
     HeadlineActions.loadHeadlines(sourceId);
-    // this.props.getSourceKey(sourceId);
     this.sourceKey = sourceId;
 
     this.setState({
@@ -85,6 +86,12 @@ class SourceSidebar extends Component {
     HeadlineActions.loadHeadlines(this.sourceKey, sortBy);
   }
 
+  onLogout(e) {
+    e.preventDefault();
+
+    actions.startLogout();
+  }
+
   toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
   render() {
@@ -92,7 +99,7 @@ class SourceSidebar extends Component {
 
     return (
       <div>
-        <Grid columns={3} centered>
+        <Grid columns={4} centered>
           <Grid.Column>
             <Button onClick={this.toggleVisibility}>
               <Icon name="sidebar" />
@@ -110,6 +117,11 @@ class SourceSidebar extends Component {
               <Dropdown options={options} onChange={this.onChange} floating button className='icon' />
             </Button.Group>
           </Grid.Column>
+          <Grid.Column>
+            <div className="page-actions">
+              <a href="#" className="ui label" onClick={this.onLogout}>Logout</a>
+            </div>
+          </Grid.Column>
         </Grid>
         <Sidebar.Pushable>
           <Sidebar as={Menu}  animation='overlay' width='wide' visible={visible} icon='labeled' vertical inverted>
@@ -117,7 +129,9 @@ class SourceSidebar extends Component {
               sources.map(source => {
                 return <SourceItem key={source.id} {...source} onClick={this.handleClick} />
               })) : (
-              <div><i className="icon active loader centered"></i>Loading...</div>
+              <Dimmer active inverted>
+                <Loader size='large' inline="centered">Loading</Loader>
+              </Dimmer>
             )}
           </Sidebar>
           <Sidebar.Pusher>

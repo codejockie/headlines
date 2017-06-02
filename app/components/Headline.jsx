@@ -1,9 +1,9 @@
 import React from 'react';
+import { Card, Dimmer, Loader } from "semantic-ui-react";
 
-import HeadlineItem from 'HeadlineItem';
 import * as HeadlineActions from '../actions/HeadlineActions';
+import HeadlineItem from 'HeadlineItem';
 import HeadlineStore from '../stores/HeadlineStore';
-import { Card } from "semantic-ui-react";
 
 class Headline extends React.Component {
   constructor(props) {
@@ -35,11 +35,15 @@ class Headline extends React.Component {
     const { error, headlines } = this.state;
 
     return (
-      <Card.Group className="ui link cards">
+      <Card.Group>
         {
           headlines && !error
             ? headlines.map((article, i) => <HeadlineItem key={i} {...article} />)
-            : <div><i className="icon active loading centered"></i>Loading...</div>
+            : (
+            <Dimmer active inverted>
+              <Loader size='large' inline="centered">Loading</Loader>
+            </Dimmer>
+          )
         }
       </Card.Group>
     );
