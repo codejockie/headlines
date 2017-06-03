@@ -22,13 +22,15 @@ export default class Article extends Component {
         article: ArticleStore.getParsedArticle(),
       });
     });
+
+    localStorage.removeItem('url');
   }
 
   render() {
     const { article } = this.state;
 
     return (
-      <Segment>
+      <Segment raised>
         <Container text textAlign='justified'>
           <Header as='h2'>{article.title}</Header>
           <Divider hidden />

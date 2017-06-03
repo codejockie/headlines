@@ -1,11 +1,7 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import moment from 'moment';
 import { hashHistory } from 'react-router';
-
-const extra = (
-  <Icon name="heart" />
-);
 
 export const formatDate = (date) => {
   if (date) {
@@ -18,21 +14,33 @@ function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   const onClick = (e, data) => {
     e.preventDefault();
 
-    localStorage.setItem('url', data.href);
+    localStorage.setItem('url', url);
     hashHistory.push('/article');
   };
 
   return (
-    <Card
-      color="blue"
-      href={url}
-      image={urlToImage}
-      header={title}
-      meta={formatDate(publishedAt)}
-      description={description}
-      extra={extra}
-      onClick={onClick}
-    />
+    <Card>
+      <Image src={urlToImage} />
+      <Card.Content>
+        <Card.Header>
+          {title}
+        </Card.Header>
+        <Card.Meta>
+          <span className='date'>
+            {formatDate(publishedAt)}
+          </span>
+        </Card.Meta>
+        <Card.Description>
+          {description}
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className='ui two buttons'>
+          <Button basic color='green' onClick={onClick}>Read here</Button>
+          <a href={url} target="_blank" className="ui button">Read from source</a>
+        </div>
+      </Card.Content>
+    </Card>
   );
 }
 
