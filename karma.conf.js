@@ -2,10 +2,11 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
   config.set({
-    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'PhantomJS' : 'Chrome'],
+    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
     singleRun: true,
     frameworks: ['mocha'],
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
       'app/components/*.jsx',
       'app/tests/**/*.test.jsx',
     ],
