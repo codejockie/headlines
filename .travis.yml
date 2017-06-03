@@ -4,9 +4,6 @@ node_js:
 addons:
   code_climate:
     repo_token: 165124b78387d2d9014229efa4d414209a9d60419ab8a162953c7b868aa417ed
-before_install:
-  - "exportDISPLAY=:99.0"
-  - "sh-e/etc/init.d/xvfbstart"
 after_script: cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 after_success:
   - npm install -g codeclimate-test-reporter
