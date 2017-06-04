@@ -26,14 +26,14 @@ class HeadlineStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      case 'RECEIVE_HEADLINES_ERROR': {
+      case 'RECEIVE_HEADLINES_ERROR':
         this.getErrors(action.error);
-      }
         break;
-      case 'RECEIVE_HEADLINES': {
+      case 'RECEIVE_HEADLINES':
         this.getHeadlines(action.headlines);
-      }
         break;
+
+      default: break;
     }
   }
 }

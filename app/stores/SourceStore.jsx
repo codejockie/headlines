@@ -20,10 +20,11 @@ class SourceStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      case 'RECEIVE_SOURCES': {
+      case 'RECEIVE_SOURCES':
         this.getSources(action.sources);
-      }
         break;
+
+      default: break;
     }
   }
 }

@@ -1,9 +1,9 @@
 import dispatcher from '../dispatcher';
-import * as api from '../api/NewsAPI';
+import { getHeadlines } from '../api/NewsAPI';
 
 export function loadHeadlines(sourceKey = '', sortBy = 'top') {
   if (sourceKey && sortBy) {
-    api.getHeadlines(sourceKey, sortBy).then(headlines => {
+    return getHeadlines(sourceKey, sortBy).then(headlines => {
       dispatcher.dispatch({
         type: 'RECEIVE_HEADLINES',
         headlines
@@ -15,7 +15,7 @@ export function loadHeadlines(sourceKey = '', sortBy = 'top') {
       })
     })
   } else {
-    api.getHeadlines().then(headlines => {
+    return getHeadlines().then(headlines => {
       dispatcher.dispatch({
         type: 'RECEIVE_HEADLINES',
         headlines

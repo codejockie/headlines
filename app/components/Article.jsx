@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Header, Segment, Divider } from 'semantic-ui-react'
+import { Container, Header, Segment, Divider } from 'semantic-ui-react';
 
-import * as ArticleActions from '../actions/ArticleActions';
+import { getArticle } from '../actions/ArticleActions';
 import ArticleStore from '../stores/ArticleStore';
 
 export default class Article extends Component {
   constructor(props) {
     super(props);
+
+    this.getArticle = this.getArticle.bind(this);
 
     this.state = {
       article: {},
@@ -15,15 +17,21 @@ export default class Article extends Component {
 
   componentWillMount() {
     const href = localStorage.getItem('url');
-    ArticleActions.getArticle(href);
+    getArticle(href);
 
-    ArticleStore.on('article_change', () => {
-      this.setState({
-        article: ArticleStore.getParsedArticle(),
-      });
-    });
+    ArticleStore.on('article_change', this.getArticle);
 
     localStorage.removeItem('url');
+  }
+
+  componentWillUnmount() {
+    ArticleStore.removeListener('article_change', this.getArticle);
+  }
+
+  getArticle() {
+    this.setState({
+      article: ArticleStore.getParsedArticle(),
+    });
   }
 
   render() {
@@ -31,8 +39,8 @@ export default class Article extends Component {
 
     return (
       <Segment raised>
-        <Container text textAlign='justified'>
-          <Header as='h2'>{article.title}</Header>
+        <Container text textAlign="justified">
+          <Header as="h2">{article.title}</Header>
           <Divider hidden />
           <p>{article.body}</p>
         </Container>

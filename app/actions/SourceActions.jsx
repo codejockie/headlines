@@ -1,12 +1,8 @@
 import dispatcher from '../dispatcher';
-import * as api from '../api/NewsAPI';
+import { getSources } from '../api/NewsAPI';
 
 export function loadSources() {
-  dispatcher.dispatch({
-    type: 'LOAD_SOURCES',
-  });
-
-  api.getSources().then(sources => {
+  return getSources().then(sources => {
     dispatcher.dispatch({
       type: 'RECEIVE_SOURCES',
       sources

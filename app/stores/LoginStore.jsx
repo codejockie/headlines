@@ -16,14 +16,14 @@ class LoginStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      case 'LOGIN': {
+      case 'LOGIN_SUCCESS':
         this.getUserId(action.uid);
-      }
         break;
-      case 'LOGOUT': {
+      case 'LOGOUT_SUCCESS':
         this.userId = '';
-      }
         break;
+
+      default: break;
     }
   }
 }

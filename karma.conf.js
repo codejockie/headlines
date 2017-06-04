@@ -4,14 +4,20 @@ module.exports = function (config) {
   config.set({
     browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
     singleRun: true,
-    frameworks: ['mocha'],
+    frameworks: [
+      'mocha',
+      'chai',
+      'sinon-chai',
+    ],
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
       'app/components/*.jsx',
-      'app/tests/**/*.test.jsx',
+      'tests.webpack.js',
+      // 'app/tests/**/*.test.jsx',
     ],
     preprocessors: {
-      'app/tests/**/*.test.jsx': ['webpack', 'sourcemap'],
+      // 'app/tests/**/*.test.jsx': ['webpack', 'sourcemap'],
+      'tests.webpack.js': ['webpack', 'sourcemap'],
       'app/components/*.jsx': ['webpack', 'sourcemap', 'coverage'],
     },
     reporters: ['mocha', 'coverage', 'coveralls'],

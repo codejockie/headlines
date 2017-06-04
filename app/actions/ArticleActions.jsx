@@ -1,9 +1,9 @@
 import dispatcher from '../dispatcher';
 
-import * as api from '../api/LateralAPI';
+import { parseArticle } from '../api/LateralAPI';
 
 export function getArticle(url) {
-  return api.parseArticle(url).then(data => {
+  return parseArticle(url).then(data => {
     dispatcher.dispatch({
       type: 'RECEIVE_ARTICLE',
       article: data,

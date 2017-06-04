@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
 class SourceItem extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.onClick = this.onClick.bind(this);

@@ -5,7 +5,7 @@ export const startLogin = () => {
   return firebase.auth().signInWithPopup(googleProvider)
     .then((result) => {
       dispatcher.dispatch({
-        type: 'LOGIN',
+        type: 'LOGIN_SUCCESS',
         uid: result.user.uid
       });
     }, (error) => {
@@ -17,7 +17,7 @@ export const startLogout = () => {
   return firebase.auth().signOut()
     .then(() => {
       dispatcher.dispatch({
-        type: 'LOGOUT',
+        type: 'LOGOUT_SUCCESS',
       });
     });
 };

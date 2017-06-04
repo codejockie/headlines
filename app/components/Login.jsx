@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Grid, Button, Icon, Segment, Header, Container, Divider } from 'semantic-ui-react';
+import { Grid, Button, Icon, Segment, Header, Divider } from 'semantic-ui-react';
 
-import * as actions from '../actions/actions';
+import { startLogin } from '../actions/LoginActions';
 
 export default class Login extends Component {
+  constructor() {
+    super();
+
+    this.onLogin = this.onLogin.bind(this);
+  }
   onLogin() {
-    actions.startLogin();
+    startLogin();
   }
 
   render() {
@@ -14,18 +19,18 @@ export default class Login extends Component {
         <Grid.Column>
           <div className="content">
             <Segment>
-              <Header as='h1' textAlign='center'>Newslines</Header>
-              <Header as='h2' icon textAlign='center'>
-                <Icon name='user' circular />
+              <Header as="h1" textAlign="center">Newslines</Header>
+              <Header as="h2" icon textAlign="center">
+                <Icon name="user" circular />
               </Header>
               <Divider section hidden />
-              <Button color='google plus' fluid onClick={this.onLogin.bind(this)}>
-                <Icon name='google plus' /> Login with Google
+              <Button color="google plus" fluid onClick={this.onLogin}>
+                <Icon name="google plus" /> Login with Google
               </Button>
             </Segment>
           </div>
         </Grid.Column>
       </Grid>
-    )
+    );
   }
 }

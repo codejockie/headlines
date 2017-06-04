@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
 
-import * as actions from '../actions/actions';
+import { startLogout } from '../actions/LoginActions';
 import Headline from 'Headline';
-import * as HeadlineActions from '../actions/HeadlineActions';
-import * as SourceActions from '../actions/SourceActions';
+import { loadHeadlines } from '../actions/HeadlineActions';
+import { loadSources } from '../actions/SourceActions';
 import SourceItem from 'SourceItem';
 import SourceStore from '../stores/SourceStore';
 
@@ -36,6 +36,7 @@ class SourceSidebar extends Component {
   constructor(props) {
     super(props);
 
+    this.getSources = this.getSources.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
@@ -46,21 +47,40 @@ class SourceSidebar extends Component {
       title: 'Today\'s Headlines',
     };
 
-    SourceActions.loadSources();
+    loadSources();
     this.sourceKey = 'reddit-r-all';
   }
 
   componentWillMount() {
-    SourceStore.on('source_change', () => {
-      this.setState({
-        sources: SourceStore.getAll(),
-      })
-    })
+    SourceStore.on('source_change', this.getSources);
+  }
+
+  componentWillUnmount() {
+    SourceStore.removeListener('source_change', this.getSources);
+  }
+
+  onChange(e, data) {
+    e.preventDefault();
+
+    const sortBy = data.value;
+    loadHeadlines(this.sourceKey, sortBy);
+  }
+
+  onLogout(e) {
+    e.preventDefault();
+
+    startLogout();
+  }
+
+  getSources() {
+    this.setState({
+      sources: SourceStore.getAll(),
+    });
   }
 
   capitalise(sourceKey) {
     return sourceKey.split('-')
-      .map(word => {
+      .map((word) => {
         if (word.length <= 3) {
           return word.substr(0, word.length).toUpperCase() + word.substr(word.length + 1);
         }
@@ -70,26 +90,13 @@ class SourceSidebar extends Component {
   }
 
   handleClick(sourceId) {
-    HeadlineActions.loadHeadlines(sourceId);
+    loadHeadlines(sourceId);
     this.sourceKey = sourceId;
 
     this.setState({
       title: this.capitalise(sourceId),
       visible: !this.state.visible,
     });
-  }
-
-  onChange(e, data) {
-    e.preventDefault();
-
-    const sortBy = data.value;
-    HeadlineActions.loadHeadlines(this.sourceKey, sortBy);
-  }
-
-  onLogout(e) {
-    e.preventDefault();
-
-    actions.startLogout();
   }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible });
@@ -109,29 +116,33 @@ class SourceSidebar extends Component {
             <h1 className="ui header">{title}</h1>
           </Grid.Column>
           <Grid.Column>
-            <Button.Group color='blue'>
+            <Button.Group color="blue">
               <Button>
                 <Icon name="sort content descending" />
                 Sort by
               </Button>
-              <Dropdown options={options} onChange={this.onChange} floating button className='icon' />
+              <Dropdown options={options} onChange={this.onChange} floating button className="icon" />
             </Button.Group>
           </Grid.Column>
           <Grid.Column>
             <div className="page-actions">
-              <a href="#" className="ui label" onClick={this.onLogout}>Logout</a>
+              <a href="#logout" className="ui label" onClick={this.onLogout}>Logout</a>
             </div>
           </Grid.Column>
         </Grid>
         <Sidebar.Pushable>
-          <Sidebar as={Menu}  animation='overlay' width='wide' visible={visible} icon='labeled' vertical inverted>
+          <Sidebar as={Menu} animation="overlay" width="wide" visible={visible} icon="labeled" vertical inverted>
             {sources ? (
-              sources.map(source => {
-                return <SourceItem key={source.id} {...source} onClick={this.handleClick} />
-              })) : (
-              <Dimmer active inverted>
-                <Loader size='large' inline="centered">Loading</Loader>
-              </Dimmer>
+              sources
+                .map(source => (<SourceItem
+                  key={source.id}
+                  {...source}
+                  onClick={this.handleClick}
+                />)))
+              : (
+                <Dimmer active inverted>
+                  <Loader size="large" inline="centered">Loading</Loader>
+                </Dimmer>
             )}
           </Sidebar>
           <Sidebar.Pusher>
