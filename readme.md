@@ -11,7 +11,7 @@ This repository contains a working version of a news app developed with React an
 ## Installation
 Run the command `npm install` to install all dependencies.
 
-## Testing
+## Test
 To run tests type the following commad `npm test`
 
 ## Author

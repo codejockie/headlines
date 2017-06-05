@@ -8,3 +8,4 @@ client/bundle.js
 config/
 .nyc_output/
 yarn.lock
+.DS_Store
