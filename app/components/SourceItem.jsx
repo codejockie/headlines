@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+import { Proptypes } from 'prop-types';
 import { Menu } from 'semantic-ui-react';
+
+// const propTypes = {
+//   name: Proptypes.string.isRequired,
+//   id: Proptypes.number.isRequired,
+//   onClick: Proptypes.func.isRequired,
+// };
 
 class SourceItem extends Component {
   constructor(props) {
@@ -26,5 +33,7 @@ class SourceItem extends Component {
     );
   }
 }
+
+// SourceItem.propTypes = propTypes;
 
 export default SourceItem;

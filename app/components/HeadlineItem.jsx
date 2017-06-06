@@ -1,14 +1,17 @@
 import React from 'react';
+import { Proptypes } from 'prop-types';
 import { Button, Card, Image } from 'semantic-ui-react';
-import moment from 'moment';
 import { hashHistory } from 'react-router';
 
-export const formatDate = (date) => {
-  if (date) {
-    return moment(date).format('ddd, MMM Do YYYY, h:mm:ss a');
-  }
-  return '';
-};
+import formatDate from '../helpers/DateFormatter';
+
+// const propTypes = {
+//   title: Proptypes.string.isRequired,
+//   description: Proptypes.string.isRequired,
+//   url: Proptypes.string.isRequired,
+//   urlToImage: Proptypes.string.isRequired,
+//   publishedAt: Proptypes.string.isRequired,
+// };
 
 function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   const onClick = (e) => {
@@ -44,4 +47,5 @@ function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   );
 }
 
+// HeadlineItem.propTypes = propTypes;
 export default HeadlineItem;

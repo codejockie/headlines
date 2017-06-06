@@ -13,7 +13,7 @@ class Headline extends React.Component {
     this.getErrors = this.getErrors.bind(this);
 
     this.state = {
-      headlines: [],
+      headlines: null,
       error: undefined,
     };
   }
@@ -43,12 +43,12 @@ class Headline extends React.Component {
   }
 
   render() {
-    const { error, headlines } = this.state;
+    const { headlines } = this.state;
 
     return (
       <Card.Group>
         {
-          headlines && !error
+          headlines
             ? headlines.map(article => <HeadlineItem key={article.url} {...article} />)
             : (
               <Dimmer active inverted>

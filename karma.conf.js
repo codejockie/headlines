@@ -13,10 +13,8 @@ module.exports = function (config) {
       'node_modules/babel-polyfill/dist/polyfill.js',
       'app/components/*.jsx',
       'tests.webpack.js',
-      // 'app/tests/**/*.test.jsx',
     ],
     preprocessors: {
-      // 'app/tests/**/*.test.jsx': ['webpack', 'sourcemap'],
       'tests.webpack.js': ['webpack', 'sourcemap'],
       'app/components/*.jsx': ['webpack', 'sourcemap', 'coverage'],
     },
