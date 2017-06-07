@@ -12,15 +12,8 @@ describe('Headline', () => {
   describe('render', () => {
     it('should render correctly', () => {
       const headline = ReactTestUtils.renderIntoDocument(<Headline />);
-      expect(headline.state.headlines).toExist();
+      expect(headline.state.headlines).toBe(null);
       expect(headline.state.error).toBe(undefined);
     });
-
-    it('renders a div', () => {
-      const component = ReactTestUtils.renderIntoDocument(<Headline />);
-      const div = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'div');
-
-      expect(div).toExist();
-    })
   });
 });

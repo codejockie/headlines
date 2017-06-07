@@ -23,13 +23,6 @@ const options = [
     value: 'latest',
     content: 'Latest',
   },
-  {
-    key: 'popular',
-    icon: 'rss',
-    text: 'Popular  ',
-    value: 'popular',
-    content: 'Popular',
-  },
 ];
 
 class SourceSidebar extends Component {

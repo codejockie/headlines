@@ -1,7 +1,7 @@
 import expect from 'expect';
 import axios from 'axios';
 
-import { getArticle } from '../../actions/ArticleActions';
+import getArticle from '../../actions/ArticleActions';
 import dispatcher from '../../dispatcher';
 import sampleArticle from '../mock/sampleArticle.json';
 
@@ -13,8 +13,8 @@ describe('Article Actions', () => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() => (
       Promise.resolve({
         data: {
-          article: sampleArticle
-        }
+          article: sampleArticle,
+        },
       })
     ));
     dispatchSpy = sinon.spy(dispatcher, 'dispatch');
@@ -35,7 +35,7 @@ describe('Article Actions', () => {
           article: sampleArticle,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_ARTICLE');
-      })
+      });
     });
   });
 });

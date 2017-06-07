@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 import { Container, Header, Segment, Divider, Dimmer, Loader } from 'semantic-ui-react';
-import { generateShareIcon } from 'react-share';
 
 import ArticleStore from '../stores/ArticleStore';
 import getArticle from '../actions/ArticleActions';
 import formatDate from '../helpers/DateFormatter';
-
-const FacebookIcon = generateShareIcon('facebook');
-const TwitterIcon = generateShareIcon('twitter');
-const WhatsappIcon = generateShareIcon('whatsapp');
-const GooglePlusIcon = generateShareIcon('google');
-const LinkedinIcon = generateShareIcon('linkedin');
+import Navbar from 'Navbar';
+import ShareIcon from 'ShareIcon';
 
 export default class Article extends Component {
   constructor(props) {
@@ -21,6 +17,8 @@ export default class Article extends Component {
     this.state = {
       article: null,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -28,11 +26,10 @@ export default class Article extends Component {
     getArticle(href);
 
     ArticleStore.on('article_change', this.getArticle);
-
-    localStorage.removeItem('url');
   }
 
   componentWillUnmount() {
+    localStorage.removeItem('url');
     ArticleStore.removeListener('article_change', this.getArticle);
   }
 
@@ -42,41 +39,34 @@ export default class Article extends Component {
     });
   }
 
+  handleClick(e) {
+    hashHistory.push('/headlines');
+  }
+
   render() {
     const { article } = this.state;
 
     return (
-      <Container text textAlign="justified">
-        {
-          article ? (
-            <Segment raised>
-              <Header as="h2">{article.title}</Header>
-              <small>{formatDate(article.date_published)}</small>
-              <FacebookIcon size={32} round />
-              <a
-                href="https://twitter.com/share"
-                data-size="large"
-                data-text={article.title}
-                data-url="https://dev.twitter.com/web/tweet-button"
-                data-hashtags="example,demo"
-                data-via="twitterdev"
-                data-related="newslines,news,newsheadlines"
-              >
-                <TwitterIcon size={32} round />
-              </a>
-              <WhatsappIcon size={32} round />
-              <GooglePlusIcon size={32} round />
-              <LinkedinIcon size={32} round />
-              <Divider hidden />
-              <span dangerouslySetInnerHTML={{ __html: article.content }} />
-            </Segment>
-          ) : (
-            <Dimmer active inverted>
-              <Loader size="large" inline="centered">Loading</Loader>
-            </Dimmer>
-          )
-        }
-      </Container>
+      <span>
+        <Navbar onClick={this.handleClick} />
+        <Container text textAlign="justified">
+          {
+            article ? (
+              <Segment raised>
+                <Header as="h2">{article.title}</Header>
+                <small>{formatDate(article.date_published)}</small>
+                <ShareIcon url={article.url} title={article.title} />
+                <Divider hidden />
+                <span dangerouslySetInnerHTML={{ __html: article.content }} />
+              </Segment>
+            ) : (
+              <Dimmer active inverted>
+                <Loader size="large" inline="centered">Loading</Loader>
+              </Dimmer>
+            )
+          }
+        </Container>
+      </span>
     );
   }
 }
