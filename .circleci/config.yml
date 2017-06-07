@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/headlines
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/node:7.10-browsers
       - image: mongo:3.4.4
     steps:
       - checkout
