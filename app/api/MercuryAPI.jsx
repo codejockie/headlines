@@ -1,10 +1,17 @@
-import mercuryParser from 'mercury-parser';
+import axios from 'axios';
 
 const API_KEY = 'z1Gv8hCJVTTyzednIRKiOOrracFirvNkxgLn1sCP';
-const mercury = mercuryParser(API_KEY);
+const BASE_URL = 'https://mercury.postlight.com/parser?url=';
+const config = {
+  headers: {
+    'content-type': 'application/json',
+    'x-api-key': API_KEY,
+  },
+};
 
 export default function parseArticle(url) {
-  return mercury.parse(url)
-    .then(response => { console.log(response); return response; })
+  const requestUrl = `${BASE_URL}${url}`;
+  return axios.get(requestUrl, config)
+    .then(response => response.data)
     .catch(error => error);
 }

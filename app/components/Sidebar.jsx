@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
 import { startLogout } from '../actions/LoginActions';
-import Headline from 'Headline';
+import Headline from './Headline';
 import { loadHeadlines } from '../actions/HeadlineActions';
 import { loadSources } from '../actions/SourceActions';
-import SourceItem from 'SourceItem';
+import SourceItem from './SourceItem';
 import SourceStore from '../stores/SourceStore';
 
 const options = [

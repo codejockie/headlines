@@ -21,8 +21,8 @@ export default class Article extends Component {
   }
 
   componentWillMount() {
-    const href = localStorage.getItem('url');
-    getArticle(href);
+    const url = localStorage.getItem('url');
+    getArticle(url);
 
     ArticleStore.on('article_change', this.getArticle);
   }
@@ -38,7 +38,7 @@ export default class Article extends Component {
     });
   }
 
-  handleClick(e) {
+  handleClick() {
     hashHistory.push('/headlines');
   }
 
@@ -46,26 +46,24 @@ export default class Article extends Component {
     const { article } = this.state;
 
     return (
-      <span>
-        <Navbar onClick={this.handleClick} />
-        <Container text textAlign="justified">
-          {
-            article ? (
-              <Segment raised>
-                <Header as="h2">{article.title}</Header>
-                <small>{formatDate(article.date_published)}</small>
-                <ShareIcon url={article.url} title={article.title} />
-                <Divider hidden />
-                <span dangerouslySetInnerHTML={{ __html: article.content }} />
-              </Segment>
-            ) : (
-              <Dimmer active inverted>
-                <Loader size="large" inline="centered">Loading</Loader>
-              </Dimmer>
-            )
-          }
-        </Container>
-      </span>
+      article ? (
+        <span>
+          <Navbar onClick={this.handleClick} />
+          <Container text textAlign="justified">
+            <Segment raised>
+              <Header as="h2">{article.title}</Header>
+              <small>{formatDate(article.date_published)}</small>
+              <ShareIcon url={article.url} title={article.title} />
+              <Divider hidden />
+              <span dangerouslySetInnerHTML={{ __html: article.content }} />
+            </Segment>
+          </Container>
+        </span>
+      ) : (
+        <Dimmer active inverted>
+          <Loader size="large" inline="centered">Loading</Loader>
+        </Dimmer>
+      )
     );
   }
 }

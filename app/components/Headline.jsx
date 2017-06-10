@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Dimmer, Loader } from 'semantic-ui-react';
 
 import { loadHeadlines } from '../actions/HeadlineActions';
-import HeadlineItem from 'HeadlineItem';
+import HeadlineItem from './HeadlineItem';
 import HeadlineStore from '../stores/HeadlineStore';
 
 class Headline extends React.Component {

@@ -10,7 +10,7 @@ const {
   FacebookShareButton,
   TwitterShareButton,
   WhatsappShareButton,
-  GoogleShareButton,
+  GooglePlusShareButton,
 } = ShareButtons;
 
 export default function ({ url, title }) {
@@ -35,13 +35,13 @@ export default function ({ url, title }) {
         </FacebookShareButton>
       </div>
       <div className="social-share">
-        <GoogleShareButton
+        <GooglePlusShareButton
           url={url}
           title={title}
           className="share-button"
         >
           <GooglePlusIcon size={32} round />
-        </GoogleShareButton>
+        </GooglePlusShareButton>
       </div>
       <div className="social-share">
         <WhatsappShareButton

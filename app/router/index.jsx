@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 
-import App from 'App';
-import Article from 'Article';
+import App from '../components/App';
+import Article from '../components/Article';
 import firebase from '../firebase/';
-import Login from 'Login';
+import Login from '../components/Login';
 
 const requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {
