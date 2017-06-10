@@ -1,5 +1,5 @@
-import expect from 'expect';
 import axios from 'axios';
+import expect from 'expect';
 
 import { loadHeadlines } from '../../actions/HeadlineActions';
 import dispatcher from '../../dispatcher';
@@ -13,8 +13,8 @@ describe('Headline Actions', () => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() => (
       Promise.resolve({
         data: {
-          headlines: sampleHeadlines
-        }
+          headlines: sampleHeadlines,
+        },
       })
     ));
     dispatchSpy = sinon.spy(dispatcher, 'dispatch');
@@ -35,7 +35,7 @@ describe('Headline Actions', () => {
           headlines: sampleHeadlines,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_HEADLINES');
-      })
+      });
     });
   });
 });

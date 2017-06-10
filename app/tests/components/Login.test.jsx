@@ -2,7 +2,7 @@ import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 
-import Login from 'Login';
+import Login from '../../components/Login';
 
 describe('Login', () => {
   it('renders', () => {

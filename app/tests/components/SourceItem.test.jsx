@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import SourceItem from 'SourceItem';
+import SourceItem from '../../components/SourceItem';
 
 describe('SourceItem', () => {
   it('should exist', () => {
@@ -30,7 +30,8 @@ describe('SourceItem', () => {
           'top',
         ],
       };
-      const source = ReactTestUtils.renderIntoDocument(<Router><SourceItem {...sources} /></Router>);
+      const source = ReactTestUtils
+        .renderIntoDocument(<Router><SourceItem {...sources} /></Router>);
       const anchorText = findDOMNode(source).querySelector('a');
 
       expect(anchorText.textContent).toEqual('ABC News (AU)');

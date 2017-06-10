@@ -5,11 +5,12 @@ const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const WhatsappIcon = generateShareIcon('whatsapp');
 const GooglePlusIcon = generateShareIcon('google');
-const LinkedinIcon = generateShareIcon('linkedin');
 
 const {
   FacebookShareButton,
   TwitterShareButton,
+  WhatsappShareButton,
+  GoogleShareButton,
 } = ShareButtons;
 
 export default function ({ url, title }) {
@@ -32,6 +33,24 @@ export default function ({ url, title }) {
         >
           <FacebookIcon size={32} round />
         </FacebookShareButton>
+      </div>
+      <div className="social-share">
+        <GoogleShareButton
+          url={url}
+          title={title}
+          className="share-button"
+        >
+          <GooglePlusIcon size={32} round />
+        </GoogleShareButton>
+      </div>
+      <div className="social-share">
+        <WhatsappShareButton
+          url={url}
+          title={title}
+          className="share-button"
+        >
+          <WhatsappIcon size={32} round />
+        </WhatsappShareButton>
       </div>
     </div>
   );

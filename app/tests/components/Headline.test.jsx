@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 
-import Headline from 'Headline';
+import Headline from '../../components/Headline';
 
 describe('Headline', () => {
   it('should exist', () => {

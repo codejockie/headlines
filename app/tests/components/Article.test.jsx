@@ -2,7 +2,7 @@ import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 
-import Article from 'Article';
+import Article from '../../components/Article';
 
 describe('Article', () => {
   beforeEach(() => {

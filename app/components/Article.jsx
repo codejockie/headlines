@@ -5,20 +5,19 @@ import { Container, Header, Segment, Divider, Dimmer, Loader } from 'semantic-ui
 import ArticleStore from '../stores/ArticleStore';
 import getArticle from '../actions/ArticleActions';
 import formatDate from '../helpers/DateFormatter';
-import Navbar from 'Navbar';
-import ShareIcon from 'ShareIcon';
+import Navbar from './Navbar';
+import ShareIcon from './ShareIcon';
 
 export default class Article extends Component {
   constructor(props) {
     super(props);
 
     this.getArticle = this.getArticle.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       article: null,
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {

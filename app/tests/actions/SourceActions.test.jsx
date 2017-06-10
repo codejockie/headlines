@@ -1,5 +1,5 @@
-import expect from 'expect';
 import axios from 'axios';
+import expect from 'expect';
 
 import { loadSources } from '../../actions/SourceActions';
 import dispatcher from '../../dispatcher';
@@ -13,8 +13,8 @@ describe('Source Actions', () => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() => (
       Promise.resolve({
         data: {
-          sources: sampleSources
-        }
+          sources: sampleSources,
+        },
       })
     ));
     dispatchSpy = sinon.spy(dispatcher, 'dispatch');
@@ -35,7 +35,7 @@ describe('Source Actions', () => {
           sources: sampleSources,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_SOURCES');
-      })
+      });
     });
   });
 });

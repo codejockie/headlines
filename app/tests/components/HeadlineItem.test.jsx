@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import HeadlineItem from 'HeadlineItem';
+import HeadlineItem from '../../components/HeadlineItem';
 
 const article = {
   author: 'Jordan Crook',

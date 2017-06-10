@@ -1,11 +1,7 @@
 node_modules/
 .idea/
 coverage/
-<<<<<<< HEAD
-=======
 client/bundle.js
->>>>>>> feature
 config/
-.nyc_output/
 yarn.lock
 .DS_Store
