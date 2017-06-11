@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'z1Gv8hCJVTTyzednIRKiOOrracFirvNkxgLn1sCP';
+const API_KEY = process.env.MERCURY_API_KEY;
 const BASE_URL = 'https://mercury.postlight.com/parser?url=';
 const config = {
   headers: {

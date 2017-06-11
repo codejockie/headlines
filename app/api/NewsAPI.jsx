@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = ' https://newsapi.org';
-const API_KEY = '213327409d384371851777e7c7f78dfe';
+const API_KEY = process.env.NEWS_API_KEY;
 
 const makeRequest = (path, sourceKey = '', sortBy = '') => {
   let requestUrl = `${BASE_URL}/v1/`;
