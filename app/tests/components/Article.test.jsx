@@ -1,15 +1,28 @@
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-import expect from 'expect';
+import { shallow } from 'enzyme';
+import {  Dimmer, Loader } from 'semantic-ui-react';
 
 import Article from '../../components/Article';
+import Navbar from '../../components/Navbar';
 
 describe('Article', () => {
   beforeEach(() => {
     localStorage.setItem('url', 'http://www.bbc.co.uk/news/election-2017-40154361');
   });
-  it('renders', () => {
-    const element = TestUtils.renderIntoDocument(<Article />);
-    expect(element).toBeTruthy();
+  it('renders correctly to page', () => {
+    const article = shallow(<Article />);
+    expect(article.length).to.equal(1);
+  });
+
+  it('renders a Dimmer', () => {
+    const wrapper = shallow(<Article />);
+    const dimmer = wrapper.find(Dimmer);
+    expect(dimmer).to.have.length.of(1);
+  });
+
+  it('renders a Loader inside a Dimmer', () => {
+    const wrapper = shallow(<Article />);
+    const loader = wrapper.find(Loader);
+    expect(loader).to.have.length.of(1);
   });
 });

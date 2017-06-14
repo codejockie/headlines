@@ -1,5 +1,5 @@
 import axios from 'axios';
-import expect from 'expect';
+import sinon from 'sinon';
 
 import { loadHeadlines } from '../../actions/HeadlineActions';
 import dispatcher from '../../dispatcher';

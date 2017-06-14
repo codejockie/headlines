@@ -5,9 +5,39 @@
   "main": "server.js",
   "scripts": {
     "test": "karma start",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "webpack",
     "start": "npm run build && node server.js"
+  },
+  "jest": {
+    "globals": {
+      "API_KEY": "AIzaSyDZOx6VF3Syb0i2DkkaT7BapsrysJ4ESYQ",
+      "AUTH_DOMAIN": "headlines-app-test.firebaseapp.com",
+      "DATABASE_URL": "https://headlines-app-test.firebaseio.com",
+      "PROJECT_ID": "headlines-app-test",
+      "STORAGE_BUCKET": "headlines-app-test.appspot.com",
+      "MESSAGING_SENDER_ID": "962321484193"
+    },
+    "setupFiles": [
+      "<rootDir>/app/mock/localStorageMock.js"
+    ],
+    "modulePaths": [
+      "/shared/vendor/modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "moduleNameMapper": {
+      "^react(.*)$": "<rootDir>/vendor/react-master$1",
+      "^config$": "<rootDir>/configs/app-config.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -27,6 +57,7 @@
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-preset-airbnb": "^2.2.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -54,8 +85,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-polyfill": "^6.23.0",
     "coveralls": "^2.13.1",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -64,6 +97,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "eslint-watch": "^3.1.0",
+    "jest": "^20.0.4",
     "karma": "^1.7.0",
     "karma-chai-plugins": "^0.9.0",
     "karma-chrome-launcher": "^2.1.1",
@@ -76,6 +110,9 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mocha": "^3.4.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-test-renderer": "^15.5.4",
+    "sinon": "^2.3.4",
     "webpack-dev-server": "^2.4.5"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
-import TestUtils from 'react-dom/test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import HeadlineItem from '../../components/HeadlineItem';
 
@@ -21,18 +21,18 @@ describe('HeadlineItem', () => {
 
   describe('render', () => {
     it('should render article to page correctly', () => {
-      const headline = TestUtils
+      const headline = ReactTestUtils
         .renderIntoDocument(<Router><HeadlineItem {...article} /></Router>);
-      const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
+      const a = ReactTestUtils.findRenderedDOMComponentWithTag(headline, 'a');
       const href = a.getAttribute('href');
 
       expect(href).toEqual('https://techcrunch.com/2017/05/22/judah-vs-the-machines/');
     });
 
     describe('headline exists', () => {
-      const headline = TestUtils
+      const headline = ReactTestUtils
         .renderIntoDocument(<Router><HeadlineItem {...article} /></Router>);
-      const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
+      const a = ReactTestUtils.findRenderedDOMComponentWithTag(headline, 'a');
 
       it('should exist', () => {
         expect(a).toExist();

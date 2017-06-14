@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import getArticle from '../../actions/ArticleActions';
 import dispatcher from '../../dispatcher';
-import sampleArticle from '../mock/sampleArticle.json';
+import sampleArticle from '../../mock/sampleArticle.json';
 
 describe('Article Actions', () => {
   let mockAxios;

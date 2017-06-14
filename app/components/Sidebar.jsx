@@ -33,9 +33,10 @@ class SourceSidebar extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.toggleVisibility = this.toggleVisibility.bind(this);
 
     this.state = {
-      sources: SourceStore.getAll(),
+      sources: null,
       visible: false,
       title: 'Today\'s Headlines',
     };
@@ -92,7 +93,9 @@ class SourceSidebar extends Component {
     });
   }
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible });
+  toggleVisibility() {
+    this.setState({ visible: !this.state.visible });
+  }
 
   render() {
     const { sources, title, visible } = this.state;

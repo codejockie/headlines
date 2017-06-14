@@ -1,11 +1,11 @@
 import axios from 'axios';
-import expect from 'expect';
+import sinon from 'sinon';
 
-import { loadHeadlines } from '../../actions/HeadlineActions';
+import getArticle from '../../actions/ArticleActions';
 import dispatcher from '../../dispatcher';
-import sampleHeadlines from '../../mock/sampleHeadlines.json';
+import sampleArticle from '../../mock/sampleArticle.json';
 
-describe('Headline Actions', () => {
+describe('Article Actions', () => {
   let mockAxios;
   let dispatchSpy;
 
@@ -13,7 +13,7 @@ describe('Headline Actions', () => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() => (
       Promise.resolve({
         data: {
-          headlines: sampleHeadlines,
+          article: sampleArticle,
         },
       })
     ));
@@ -25,16 +25,16 @@ describe('Headline Actions', () => {
     dispatcher.dispatch.restore();
   });
 
-  describe('Test for loadHeadlines method', () => {
+  describe('Test for getArticle method', () => {
     it('should dispatch an action', () => {
-      loadHeadlines().then(() => {
+      getArticle('http://www.bbc.co.uk/sport/football/40147044').then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         dispatcher.dispatch({
-          type: 'RECEIVE_HEADLINES',
-          headlines: sampleHeadlines,
+          type: 'RECEIVE_ARTICLE',
+          article: sampleArticle,
         });
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_HEADLINES');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_ARTICLE');
       });
     });
   });

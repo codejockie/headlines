@@ -3,10 +3,24 @@ import { hashHistory } from 'react-router';
 import { Menu, Icon } from 'semantic-ui-react';
 
 export default class Navbar extends Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {};
 
-  onClick = (e) => { this.props.onClick(e); };
-  handleItemClick = (e, { name }) => hashHistory.push('/headlines');
+    this.onClick = this.onClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  onClick(e) {
+    this.props.onClick(e);
+  }
+
+  handleClick(e, { name }) {
+    hashHistory.push('/headlines');
+  }
+
+  // onClick = (e) => { this.props.onClick(e); };
+  // handleItemClick = (e, { name }) => hashHistory.push('/headlines');
 
   render() {
     const { activeItem } = this.state;

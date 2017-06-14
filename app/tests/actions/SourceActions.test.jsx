@@ -3,7 +3,7 @@ import expect from 'expect';
 
 import { loadSources } from '../../actions/SourceActions';
 import dispatcher from '../../dispatcher';
-import sampleSources from '../mock/sampleSources.json';
+import sampleSources from '../../mock/sampleSources.json';
 
 describe('Source Actions', () => {
   let mockAxios;

@@ -17,6 +17,9 @@ module.exports = {
   ],
   externals: {
     jquery: 'jQuery',
+    'react/addons': 'react',
+    'react/lib/ExecutionEnvironment': 'react',
+    'react/lib/ReactContext': 'react',
   },
   output: {
     path: path.resolve(__dirname, 'client'),
@@ -38,7 +41,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['react', 'es2015', 'stage-0'],
+              presets: ['react', 'es2015', 'stage-0', 'airbnb'],
             },
           },
         ],
