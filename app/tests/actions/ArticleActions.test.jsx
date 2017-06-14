@@ -35,6 +35,7 @@ describe('Article Actions', () => {
           article: sampleArticle,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_ARTICLE');
+        expect(dispatchSpy.getCall(0).args[0].article).toBe(sampleArticle);
       });
     });
   });

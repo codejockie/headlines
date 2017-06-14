@@ -26,7 +26,7 @@ describe('Headline Actions', () => {
   });
 
   describe('Test for loadHeadlines method', () => {
-    it('should dispatch an action', () => {
+    it('dispatches an action with an action type of \'RECEIVE_HEADLINES\'', () => {
       loadHeadlines().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
@@ -35,6 +35,16 @@ describe('Headline Actions', () => {
           headlines: sampleHeadlines,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_HEADLINES');
+      });
+    });
+
+    it('dispatches an action with sampleHeadlines as headlines data', () => {
+      loadHeadlines().then(() => {
+        dispatcher.dispatch({
+          type: 'RECEIVE_HEADLINES',
+          headlines: sampleHeadlines,
+        });
+        expect(dispatchSpy.getCall(0).args[0].headlines).toBe(sampleHeadlines);
       });
     });
   });

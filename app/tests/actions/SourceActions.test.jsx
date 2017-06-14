@@ -26,15 +26,30 @@ describe('Source Actions', () => {
   });
 
   describe('Test for loadSources method', () => {
-    it('should dispatch an action', () => {
+    it('calls axios and dispatcher at least once', () => {
       loadSources().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
+      });
+    });
+
+    it('dispatches an action with a type of \'RECEIVE_SOURCES\'', () => {
+      loadSources().then(() => {
         dispatcher.dispatch({
           type: 'RECEIVE_SOURCES',
           sources: sampleSources,
         });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('RECEIVE_SOURCES');
+      });
+    });
+
+    it('dispatches an action with sampleSources as sources data', () => {
+      loadSources().then(() => {
+        dispatcher.dispatch({
+          type: 'RECEIVE_SOURCES',
+          sources: sampleSources,
+        });
+        expect(dispatchSpy.getCall(0).args[0].sources).toBe(sampleSources);
       });
     });
   });

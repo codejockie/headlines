@@ -9,14 +9,6 @@
     "start": "npm run build && node server.js"
   },
   "jest": {
-    "globals": {
-      "API_KEY": "AIzaSyDZOx6VF3Syb0i2DkkaT7BapsrysJ4ESYQ",
-      "AUTH_DOMAIN": "headlines-app-test.firebaseapp.com",
-      "DATABASE_URL": "https://headlines-app-test.firebaseio.com",
-      "PROJECT_ID": "headlines-app-test",
-      "STORAGE_BUCKET": "headlines-app-test.appspot.com",
-      "MESSAGING_SENDER_ID": "962321484193"
-    },
     "setupFiles": [
       "<rootDir>/app/mock/localStorageMock.js"
     ],
