@@ -4,15 +4,10 @@ const envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-try {
-  envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
-} catch (e) {
-  /**/
-}
+envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
 
 module.exports = {
   entry: [
-    // 'script-loader!jquery/dist/jquery.min.js',
     './app/app.jsx',
   ],
   externals: {
