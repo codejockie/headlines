@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Dimmer, Loader } from 'semantic-ui-react';
 
-import { loadHeadlines } from '../actions/HeadlineActions';
+import loadHeadlines from '../actions/HeadlineActions';
 import HeadlineItem from './HeadlineItem';
 import HeadlineStore from '../stores/HeadlineStore';
 
@@ -10,35 +10,30 @@ class Headline extends React.Component {
     super(props);
 
     this.getHeadlines = this.getHeadlines.bind(this);
-    this.getErrors = this.getErrors.bind(this);
 
     this.state = {
       headlines: null,
-      error: undefined,
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     loadHeadlines();
 
     HeadlineStore.on('headline_change', this.getHeadlines);
-    HeadlineStore.on('error', this.getErrors);
   }
 
   componentWillUnmount() {
     HeadlineStore.removeListener('headline_change', this.getHeadlines);
-    HeadlineStore.removeListener('error', this.getErrors);
   }
 
+  /**
+   * getHeadlines sets the state with the fetched headlines.
+   * @method
+   * @returns {void}
+   */
   getHeadlines() {
     this.setState({
       headlines: HeadlineStore.getAll(),
-    });
-  }
-
-  getErrors() {
-    this.setState({
-      error: HeadlineStore.getErrors(),
     });
   }
 

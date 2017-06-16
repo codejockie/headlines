@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import TestUtils from 'react-dom/test-utils';
 
-import HeadlineItem from '../../components/HeadlineItem';
+import HeadlineItem from '../../components/HeadlineItem.jsx';
 
 const article = {
   author: 'Jordan Crook',
@@ -22,7 +21,7 @@ describe('HeadlineItem', () => {
   describe('render', () => {
     it('should render article to page correctly', () => {
       const headline = TestUtils
-        .renderIntoDocument(<Router><HeadlineItem {...article} /></Router>);
+        .renderIntoDocument(<HeadlineItem {...article} />);
       const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
       const href = a.getAttribute('href');
 
@@ -31,7 +30,7 @@ describe('HeadlineItem', () => {
 
     describe('headline exists', () => {
       const headline = TestUtils
-        .renderIntoDocument(<Router><HeadlineItem {...article} /></Router>);
+        .renderIntoDocument(<HeadlineItem {...article} />);
       const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
 
       it('should exist', () => {

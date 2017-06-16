@@ -9,6 +9,12 @@ const config = {
   },
 };
 
+/**
+ * parseArticle scrapes the news article
+ * @function
+ * @param {string} url
+ * @returns {promise} Promise
+ */
 export default function parseArticle(url) {
   const requestUrl = `${BASE_URL}${url}`;
   return axios.get(requestUrl, config)

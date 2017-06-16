@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import { Proptypes } from 'prop-types';
 import { Menu } from 'semantic-ui-react';
 
-// const propTypes = {
-//   name: Proptypes.string.isRequired,
-//   id: Proptypes.number.isRequired,
-//   onClick: Proptypes.func.isRequired,
-// };
-
 class SourceItem extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +9,11 @@ class SourceItem extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  /**
+   * onClick passes the id of the selected news source to its parent component (Sidebar)
+   * @method
+   * @returns {void}
+   */
   onClick(event) {
     event.preventDefault();
     const sourceId = event.target.getAttribute('href');
@@ -33,7 +32,5 @@ class SourceItem extends Component {
     );
   }
 }
-
-// SourceItem.propTypes = propTypes;
 
 export default SourceItem;

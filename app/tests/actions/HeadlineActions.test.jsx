@@ -1,8 +1,9 @@
 import axios from 'axios';
 import expect from 'expect';
+import sinon from 'sinon';
 
-import { loadHeadlines } from '../../actions/HeadlineActions';
-import dispatcher from '../../dispatcher';
+import { loadHeadlines } from '../../actions/HeadlineActions.jsx';
+import dispatcher from '../../dispatcher.jsx';
 import sampleHeadlines from '../../mock/sampleHeadlines.json';
 
 describe('Headline Actions', () => {
@@ -25,7 +26,7 @@ describe('Headline Actions', () => {
     dispatcher.dispatch.restore();
   });
 
-  describe('Test for loadHeadlines method', () => {
+  describe('loadHeadlines', () => {
     it('dispatches an action with an action type of \'RECEIVE_HEADLINES\'', () => {
       loadHeadlines().then(() => {
         expect(mockAxios.calledOnce).toBe(true);

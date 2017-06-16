@@ -5,14 +5,11 @@ import { hashHistory } from 'react-router';
 
 import formatDate from '../helpers/DateFormatter';
 
-// const propTypes = {
-//   title: Proptypes.string.isRequired,
-//   description: Proptypes.string.isRequired,
-//   url: Proptypes.string.isRequired,
-//   urlToImage: Proptypes.string.isRequired,
-//   publishedAt: Proptypes.string.isRequired,
-// };
-
+/**
+ * HeadlineItem is a stateless component function.
+ * @function
+ * @returns {<Card>}
+ */
 function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   const onClick = (e) => {
     e.preventDefault();
@@ -47,5 +44,4 @@ function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   );
 }
 
-// HeadlineItem.propTypes = propTypes;
 export default HeadlineItem;

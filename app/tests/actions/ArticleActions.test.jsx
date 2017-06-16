@@ -1,8 +1,9 @@
-import expect from 'expect';
 import axios from 'axios';
+import expect from 'expect';
+import sinon from 'sinon';
 
-import getArticle from '../../actions/ArticleActions';
-import dispatcher from '../../dispatcher';
+import getArticle from '../../actions/ArticleActions.jsx';
+import dispatcher from '../../dispatcher.jsx';
 import sampleArticle from '../../mock/sampleArticle.json';
 
 describe('Article Actions', () => {
@@ -25,7 +26,7 @@ describe('Article Actions', () => {
     dispatcher.dispatch.restore();
   });
 
-  describe('Test for getArticle method', () => {
+  describe('getArticle', () => {
     it('should dispatch an action', () => {
       getArticle('http://www.bbc.co.uk/sport/football/40147044').then(() => {
         expect(mockAxios.calledOnce).toBe(true);

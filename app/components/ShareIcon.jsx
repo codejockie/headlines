@@ -13,6 +13,11 @@ const {
   GooglePlusShareButton,
 } = ShareButtons;
 
+/**
+ * ShareIcon is a stateless component function.
+ * @function
+ * @returns {<div>}
+ */
 export default function ({ url, title }) {
   return (
     <div className="share-container">

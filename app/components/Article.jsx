@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
-import { Container, Header, Segment, Divider, Dimmer, Loader } from 'semantic-ui-react';
+import { Button, Container, Header, Segment, Divider, Dimmer, Loader } from 'semantic-ui-react';
 
 import ArticleStore from '../stores/ArticleStore';
 import getArticle from '../actions/ArticleActions';
 import formatDate from '../helpers/DateFormatter';
-import Navbar from './Navbar';
 import ShareIcon from './ShareIcon';
 
 export default class Article extends Component {
@@ -13,14 +12,14 @@ export default class Article extends Component {
     super(props);
 
     this.getArticle = this.getArticle.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.onClick = this.onClick.bind(this);
 
     this.state = {
       article: null,
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const url = localStorage.getItem('url');
     getArticle(url);
 
@@ -32,13 +31,23 @@ export default class Article extends Component {
     ArticleStore.removeListener('article_change', this.getArticle);
   }
 
+  /**
+   * getArticle sets the state with the scraped article.
+   * @method
+   * @returns {void}
+   */
   getArticle() {
     this.setState({
       article: ArticleStore.getParsedArticle(),
     });
   }
 
-  handleClick() {
+  /**
+   * handleClick method for returning to the headlines.
+   * @method
+   * @returns {void}
+   */
+  onClick() {
     hashHistory.push('/headlines');
   }
 
@@ -48,9 +57,9 @@ export default class Article extends Component {
     return (
       article ? (
         <span>
-          <Navbar onClick={this.handleClick} />
           <Container text textAlign="justified">
             <Segment raised>
+              <Button circular icon="arrow left" onClick={this.onClick} />
               <Header as="h2">{article.title}</Header>
               <small>{formatDate(article.date_published)}</small>
               <ShareIcon url={article.url} title={article.title} />

@@ -1,17 +1,41 @@
-import dispatcher from '../dispatcher';
-import firebase, { googleProvider } from '../firebase/';
+import dispatcher from '../dispatcher.jsx';
+import firebase from '../firebase/index.jsx';
 
-export const startLogin = () => firebase.auth()
-  .signInWithPopup(googleProvider)
+/**
+ * authenticate function for initiating the sign in process.
+ * @function
+ * @param {func} authProvider - The type of authentication provider to use
+ * @returns {void}
+ */
+function authenticate(authProvider) {
+  firebase.auth()
+    .signInWithPopup(authProvider)
     .then((result) => {
       dispatcher.dispatch({
         type: 'LOGIN_SUCCESS',
         uid: result.user.uid,
       });
     }, (error) => {
-      console.log('Unable to auth', error);
+      dispatcher.dispatch({
+        type: 'LOGIN_FAILURE',
+        error,
+      });
     });
+}
 
+/**
+ * startLogin function for initiating the sign in process.
+ * @function
+ * @param {func} authProvider - The type of authentication provider to use
+ * @returns {void}
+ */
+export const startLogin = authProvider => authenticate(authProvider);
+
+/**
+ * startLogout function for initiating the sign out process.
+ * @function
+ * @returns {void}
+ */
 export const startLogout = () => firebase.auth()
   .signOut()
     .then(() => {

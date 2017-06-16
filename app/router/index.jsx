@@ -3,9 +3,17 @@ import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 
 import App from '../components/App';
 import Article from '../components/Article';
-import firebase from '../firebase/';
+import firebase from '../firebase/index';
 import Login from '../components/Login';
 
+/**
+ * requireLogin checks for a currently logged in user
+ * @function
+ * @param {string} nextState
+ * @param {string} replace
+ * @param {string} next
+ * @returns {void}
+ */
 const requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {
     replace('/');
@@ -13,6 +21,14 @@ const requireLogin = (nextState, replace, next) => {
   next();
 };
 
+/**
+ * redirectIfLogged redirect a user if there's a currently logged in user
+ * @function
+ * @param {string} nextState
+ * @param {string} replace
+ * @param {string} next
+ * @returns {void}
+ */
 const redirectIfLoggedIn = (nextState, replace, next) => {
   if (firebase.auth().currentUser) {
     replace('/headlines');

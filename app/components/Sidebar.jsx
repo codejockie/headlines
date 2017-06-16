@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
 import { startLogout } from '../actions/LoginActions';
+import capitalise from '../helpers/Capitalise';
 import Headline from './Headline';
-import { loadHeadlines } from '../actions/HeadlineActions';
-import { loadSources } from '../actions/SourceActions';
+import loadHeadlines from '../actions/HeadlineActions';
+import loadSources from '../actions/SourceActions';
 import SourceItem from './SourceItem';
 import SourceStore from '../stores/SourceStore';
 
@@ -41,11 +42,11 @@ class SourceSidebar extends Component {
       title: 'Today\'s Headlines',
     };
 
-    loadSources();
     this.sourceKey = 'reddit-r-all';
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    loadSources();
     SourceStore.on('source_change', this.getSources);
   }
 
@@ -53,6 +54,11 @@ class SourceSidebar extends Component {
     SourceStore.removeListener('source_change', this.getSources);
   }
 
+  /**
+   * onChange handles the sortBy filter, calling the loadHeadlines method.
+   * @method
+   * @returns {void}
+   */
   onChange(e, data) {
     e.preventDefault();
 
@@ -60,39 +66,48 @@ class SourceSidebar extends Component {
     loadHeadlines(this.sourceKey, sortBy);
   }
 
+  /**
+   * onLogout initiates the logout process.
+   * @method
+   * @returns {void}
+   */
   onLogout(e) {
     e.preventDefault();
 
     startLogout();
   }
 
+  /**
+   * getSources sets the state of the component with that of the fetched sources.
+   * @method
+   * @returns {void}
+   */
   getSources() {
     this.setState({
       sources: SourceStore.getAll(),
     });
   }
 
-  capitalise(sourceKey) {
-    return sourceKey.split('-')
-      .map((word) => {
-        if (word.length <= 3) {
-          return word.substr(0, word.length).toUpperCase() + word.substr(word.length + 1);
-        }
-        return word.charAt(0).toUpperCase() + word.substr(1);
-      })
-      .join(' ');
-  }
-
+  /**
+   * handleClick is a click handler for a changing the currently selected source to different another
+   * @method
+   * @returns {void}
+   */
   handleClick(sourceId) {
     loadHeadlines(sourceId);
     this.sourceKey = sourceId;
 
     this.setState({
-      title: this.capitalise(sourceId),
+      title: capitalise(sourceId),
       visible: !this.state.visible,
     });
   }
 
+  /**
+   * toggleVisiblitity is used to hide/show the sources sidebar
+   * @method
+   * @returns {void}
+   */
   toggleVisibility() {
     this.setState({ visible: !this.state.visible });
   }
@@ -114,7 +129,7 @@ class SourceSidebar extends Component {
           <Grid.Column>
             <Button.Group color="blue">
               <Button>
-                <Icon name="sort content descending" />
+                <Icon name="filter" />
                 Sort by
               </Button>
               <Dropdown options={options} onChange={this.onChange} floating button className="icon" />

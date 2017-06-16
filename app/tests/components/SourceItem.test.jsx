@@ -1,10 +1,9 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import SourceItem from '../../components/SourceItem';
+import SourceItem from '../../components/SourceItem.jsx';
 
 describe('SourceItem', () => {
   it('should exist', () => {
@@ -16,7 +15,8 @@ describe('SourceItem', () => {
       const sources = {
         id: 'abc-news-au',
         name: 'ABC News (AU)',
-        description: 'Australia\'s most trusted source of local, national and world news. Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.',
+        description: 'Australia\'s most trusted source of local, national and world news. ' +
+        'Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.',
         url: 'http://www.abc.net.au/news',
         category: 'general',
         language: 'en',
@@ -31,7 +31,7 @@ describe('SourceItem', () => {
         ],
       };
       const source = ReactTestUtils
-        .renderIntoDocument(<Router><SourceItem {...sources} /></Router>);
+        .renderIntoDocument(<SourceItem {...sources} />);
       const anchorText = findDOMNode(source).querySelector('a');
 
       expect(anchorText.textContent).toEqual('ABC News (AU)');

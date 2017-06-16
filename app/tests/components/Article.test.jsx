@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import {  Dimmer, Loader } from 'semantic-ui-react';
 
 import Article from '../../components/Article';
-import Navbar from '../../components/Navbar';
 
 describe('Article', () => {
   beforeEach(() => {

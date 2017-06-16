@@ -11,6 +11,7 @@ module.exports = function (config) {
     ],
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
+      'app/actions/*.jsx',
       'app/components/*.jsx',
       'tests.webpack.js',
     ],

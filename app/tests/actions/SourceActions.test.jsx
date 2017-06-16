@@ -1,8 +1,9 @@
 import axios from 'axios';
 import expect from 'expect';
+import sinon from 'sinon';
 
-import { loadSources } from '../../actions/SourceActions';
-import dispatcher from '../../dispatcher';
+import { loadSources } from '../../actions/SourceActions.jsx';
+import dispatcher from '../../dispatcher.jsx';
 import sampleSources from '../../mock/sampleSources.json';
 
 describe('Source Actions', () => {
@@ -25,7 +26,7 @@ describe('Source Actions', () => {
     dispatcher.dispatch.restore();
   });
 
-  describe('Test for loadSources method', () => {
+  describe('loadSources', () => {
     it('calls axios and dispatcher at least once', () => {
       loadSources().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
