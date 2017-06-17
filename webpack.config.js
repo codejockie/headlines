@@ -4,7 +4,9 @@ const envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
+if (process.env.NODE_ENV === 'development') {
+  envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
+}
 
 module.exports = {
   entry: [
