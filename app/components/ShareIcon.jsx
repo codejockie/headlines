@@ -16,7 +16,7 @@ const {
 /**
  * ShareIcon is a stateless component function.
  * @function
- * @returns {<div>}
+ * @returns {div} div
  */
 export default function ({ url, title }) {
   return (

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 
-import App from '../components/App';
-import Article from '../components/Article';
-import firebase from '../firebase/index';
-import Login from '../components/Login';
+import App from '../components/App.jsx';
+import Article from '../components/Article.jsx';
+import firebase from '../firebase/index.jsx';
+import Login from '../components/Login.jsx';
 
 /**
  * requireLogin checks for a currently logged in user

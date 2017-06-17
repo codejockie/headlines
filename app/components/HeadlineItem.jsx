@@ -8,7 +8,12 @@ import formatDate from '../helpers/DateFormatter';
 /**
  * HeadlineItem is a stateless component function.
  * @function
- * @returns {<Card>}
+ * @param {string} title
+ * @param {string} description
+ * @param {string} url
+ * @param {string} urlToImage
+ * @param {Date} publishedAt
+ * @returns {Card} Card
  */
 function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   const onClick = (e) => {
@@ -37,7 +42,9 @@ function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
       <Card.Content extra>
         <div className="ui two buttons">
           <Button basic color="green" onClick={onClick}>Read here</Button>
-          <a href={url} target="_blank" rel="noopener noreferrer" className="ui button">Read from source</a>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="ui button">
+            Read from source
+          </a>
         </div>
       </Card.Content>
     </Card>

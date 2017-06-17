@@ -2,7 +2,7 @@ import axios from 'axios';
 import expect from 'expect';
 import sinon from 'sinon';
 
-import { loadHeadlines } from '../../actions/HeadlineActions.jsx';
+import loadHeadlines from '../../actions/HeadlineActions.jsx';
 import dispatcher from '../../dispatcher.jsx';
 import sampleHeadlines from '../../mock/sampleHeadlines.json';
 

@@ -28,7 +28,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.jsx$/,
         exclude: /(node_modules|bower_components)/,

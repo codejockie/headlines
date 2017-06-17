@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { Grid, Button, Icon, Segment, Header, Divider } from 'semantic-ui-react';
 
-import { startLogin } from '../actions/LoginActions';
+import { startLogin } from '../actions/LoginActions.jsx';
 import { githubProvider, googleProvider } from '../firebase/index.jsx';
 
+/**
+ * Login Component
+ * @class
+ */
 export default class Login extends Component {
+  /**
+   * @constructor
+   */
   constructor() {
     super();
 
@@ -30,6 +37,11 @@ export default class Login extends Component {
     startLogin(githubProvider);
   }
 
+  /**
+   * render
+   * @method
+   * @returns {Grid} Grid
+   */
   render() {
     return (
       <Grid centered columns={4}>

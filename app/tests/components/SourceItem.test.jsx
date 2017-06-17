@@ -1,18 +1,19 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import expect from 'expect';
-import ReactTestUtils from 'react-dom/test-utils';
+import { shallow } from 'enzyme';
 
 import SourceItem from '../../components/SourceItem.jsx';
 
-describe('SourceItem', () => {
-  it('should exist', () => {
-    expect(SourceItem).toExist();
+describe('<SourceItem />', () => {
+  it('renders correctly to page', () => {
+    const wrapper = shallow(<SourceItem />);
+    expect(wrapper.length).to.equal(1);
   });
 
   describe('render', () => {
-    it('should render source to page correctly', () => {
-      const sources = {
+    let sources;
+
+    beforeEach(() => {
+      sources = {
         id: 'abc-news-au',
         name: 'ABC News (AU)',
         description: 'Australia\'s most trusted source of local, national and world news. ' +
@@ -30,11 +31,22 @@ describe('SourceItem', () => {
           'top',
         ],
       };
-      const source = ReactTestUtils
-        .renderIntoDocument(<SourceItem {...sources} />);
-      const anchorText = findDOMNode(source).querySelector('a');
+    });
 
-      expect(anchorText.textContent).toEqual('ABC News (AU)');
+    it('should have an anchor element', () => {
+      const wrapper = shallow(<SourceItem {...sources} />);
+      expect(wrapper.find('a')).to.have.length(1);
+    });
+
+    it('should have an anchor element with its text attr set', () => {
+      const wrapper = shallow(<SourceItem {...sources} />);
+      expect(wrapper.find('a').text()).to.equal('ABC News (AU)');
+    });
+
+    it('should have props for name and id', () => {
+      const wrapper = shallow(<SourceItem {...sources} />);
+      expect(wrapper.props().name).to.be.defined;
+      expect(wrapper.props().id).to.be.defined;
     });
   });
 });

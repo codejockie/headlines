@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
-import { startLogout } from '../actions/LoginActions';
-import capitalise from '../helpers/Capitalise';
-import Headline from './Headline';
-import loadHeadlines from '../actions/HeadlineActions';
-import loadSources from '../actions/SourceActions';
-import SourceItem from './SourceItem';
-import SourceStore from '../stores/SourceStore';
+import { startLogout } from '../actions/LoginActions.jsx';
+import capitalise from '../helpers/Capitalise.jsx';
+import createOptions from '../helpers/OptionsCreator.jsx';
+import Headline from './Headline.jsx';
+import loadHeadlines from '../actions/HeadlineActions.jsx';
+import loadSources from '../actions/SourceActions.jsx';
+import SourceItem from './SourceItem.jsx';
+import SourceStore from '../stores/SourceStore.jsx';
 
-const options = [
-  {
-    key: 'top',
-    icon: 'line chart',
-    text: 'Top  ',
-    value: 'top',
-    content: 'Top',
-  },
-  {
-    key: 'latest',
-    icon: 'newspaper',
-    text: 'Latest  ',
-    value: 'latest',
-    content: 'Latest',
-  },
-];
-
-class SourceSidebar extends Component {
+/**
+ * SourceSidebar
+ * @class
+ */
+export default class SourceSidebar extends Component {
+  /**
+   * @constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
 
@@ -37,6 +29,22 @@ class SourceSidebar extends Component {
     this.toggleVisibility = this.toggleVisibility.bind(this);
 
     this.state = {
+      options: [
+        {
+          key: 'top',
+          icon: 'line chart',
+          text: 'Top',
+          value: 'top',
+          content: 'Top',
+        },
+        {
+          key: 'latest',
+          icon: 'newspaper',
+          text: 'Latest',
+          value: 'latest',
+          content: 'Latest',
+        },
+      ],
       sources: null,
       visible: false,
       title: 'Today\'s Headlines',
@@ -45,11 +53,21 @@ class SourceSidebar extends Component {
     this.sourceKey = 'reddit-r-all';
   }
 
+  /**
+   * componentDidMount
+   * @method
+   * @returns {void}
+   */
   componentDidMount() {
     loadSources();
     SourceStore.on('source_change', this.getSources);
   }
 
+  /**
+   * componentWillUnmount
+   * @method
+   * @returns {void}
+   */
   componentWillUnmount() {
     SourceStore.removeListener('source_change', this.getSources);
   }
@@ -57,6 +75,8 @@ class SourceSidebar extends Component {
   /**
    * onChange handles the sortBy filter, calling the loadHeadlines method.
    * @method
+   * @param {string} e
+   * @param {string} data
    * @returns {void}
    */
   onChange(e, data) {
@@ -69,6 +89,7 @@ class SourceSidebar extends Component {
   /**
    * onLogout initiates the logout process.
    * @method
+   * @param {string} e
    * @returns {void}
    */
   onLogout(e) {
@@ -89,22 +110,25 @@ class SourceSidebar extends Component {
   }
 
   /**
-   * handleClick is a click handler for a changing the currently selected source to different another
+   * handleClick: click handler for changing the currently selected source to a different source
    * @method
+   * @param {string} sourceId
+   * @param {Array} sortBysAvailable
    * @returns {void}
    */
-  handleClick(sourceId) {
+  handleClick(sourceId, sortBysAvailable) {
     loadHeadlines(sourceId);
     this.sourceKey = sourceId;
 
     this.setState({
+      options: createOptions(sortBysAvailable),
       title: capitalise(sourceId),
-      visible: !this.state.visible,
     });
+    this.toggleVisibility();
   }
 
   /**
-   * toggleVisiblitity is used to hide/show the sources sidebar
+   * toggleVisibility is used to hide/show the sources sidebar
    * @method
    * @returns {void}
    */
@@ -112,8 +136,13 @@ class SourceSidebar extends Component {
     this.setState({ visible: !this.state.visible });
   }
 
+  /**
+   * render
+   * @method
+   * @returns {div} div
+   */
   render() {
-    const { sources, title, visible } = this.state;
+    const { options, sources, title, visible } = this.state;
 
     return (
       <div>
@@ -127,13 +156,15 @@ class SourceSidebar extends Component {
             <h1 className="ui header">{title}</h1>
           </Grid.Column>
           <Grid.Column>
-            <Button.Group color="blue">
-              <Button>
-                <Icon name="filter" />
-                Sort by
-              </Button>
-              <Dropdown options={options} onChange={this.onChange} floating button className="icon" />
-            </Button.Group>
+            <Dropdown text='Sort headlines'
+                      floating
+                      labeled
+                      button
+                      className='icon'
+                      icon='sort'
+                      options={options}
+                      onChange={this.onChange}
+            />
           </Grid.Column>
           <Grid.Column>
             <div className="page-actions">
@@ -142,10 +173,14 @@ class SourceSidebar extends Component {
           </Grid.Column>
         </Grid>
         <Sidebar.Pushable>
-          <Sidebar as={Menu} animation="overlay" width="wide" visible={visible} icon="labeled" vertical inverted>
-            {sources ? (
-              sources
-                .map(source => (<SourceItem
+          <Sidebar as={Menu} animation="overlay"
+                   width="wide" visible={visible}
+                   icon="labeled"
+                   vertical
+                   inverted>
+            {
+              sources ? (
+              sources.map(source => (<SourceItem
                   key={source.id}
                   {...source}
                   onClick={this.handleClick}
@@ -166,5 +201,3 @@ class SourceSidebar extends Component {
     );
   }
 }
-
-export default SourceSidebar;

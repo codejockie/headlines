@@ -1,11 +1,19 @@
 import React from 'react';
 import { Card, Dimmer, Loader } from 'semantic-ui-react';
 
-import loadHeadlines from '../actions/HeadlineActions';
-import HeadlineItem from './HeadlineItem';
-import HeadlineStore from '../stores/HeadlineStore';
+import loadHeadlines from '../actions/HeadlineActions.jsx';
+import HeadlineItem from './HeadlineItem.jsx';
+import HeadlineStore from '../stores/HeadlineStore.jsx';
 
-class Headline extends React.Component {
+/**
+ * Headline
+ * @class
+ */
+export default class Headline extends React.Component {
+  /**
+   * @constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
 
@@ -16,12 +24,22 @@ class Headline extends React.Component {
     };
   }
 
+  /**
+   * componentDidMount
+   * @method
+   * @returns {void}
+   */
   componentDidMount() {
     loadHeadlines();
 
     HeadlineStore.on('headline_change', this.getHeadlines);
   }
 
+  /**
+   * componentWillUnmount
+   * @method
+   * @returns {void}
+   */
   componentWillUnmount() {
     HeadlineStore.removeListener('headline_change', this.getHeadlines);
   }
@@ -37,6 +55,11 @@ class Headline extends React.Component {
     });
   }
 
+  /**
+   * render
+   * @method
+   * @returns {Card} Card
+   */
   render() {
     const { headlines } = this.state;
 
@@ -55,5 +78,3 @@ class Headline extends React.Component {
     );
   }
 }
-
-export default Headline;

@@ -12,12 +12,14 @@ module.exports = function (config) {
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
       'app/actions/*.jsx',
+      'app/stores/*.jsx',
       'app/components/*.jsx',
       'tests.webpack.js',
     ],
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap'],
       'app/actions/*.jsx': ['webpack', 'sourcemap', 'coverage'],
+      'app/stores/*.jsx': ['webpack', 'sourcemap', 'coverage'],
       'app/components/*.jsx': ['webpack', 'sourcemap', 'coverage'],
     },
     reporters: ['mocha', 'coverage', 'coveralls'],

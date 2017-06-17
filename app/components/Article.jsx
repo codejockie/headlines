@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import { Button, Container, Header, Segment, Divider, Dimmer, Loader } from 'semantic-ui-react';
 
-import ArticleStore from '../stores/ArticleStore';
-import getArticle from '../actions/ArticleActions';
-import formatDate from '../helpers/DateFormatter';
-import ShareIcon from './ShareIcon';
+import ArticleStore from '../stores/ArticleStore.jsx';
+import getArticle from '../actions/ArticleActions.jsx';
+import formatDate from '../helpers/DateFormatter.jsx';
+import ShareIcon from './ShareIcon.jsx';
 
+/**
+ * Article Component
+ * @class
+ */
 export default class Article extends Component {
+  /**
+   * @constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
 
@@ -19,6 +27,11 @@ export default class Article extends Component {
     };
   }
 
+  /**
+   * componentDidMount
+   * @method
+   * @returns {void}
+   */
   componentDidMount() {
     const url = localStorage.getItem('url');
     getArticle(url);
@@ -26,6 +39,11 @@ export default class Article extends Component {
     ArticleStore.on('article_change', this.getArticle);
   }
 
+  /**
+   * componentWillUnmount
+   * @method
+   * @returns {void}
+   */
   componentWillUnmount() {
     localStorage.removeItem('url');
     ArticleStore.removeListener('article_change', this.getArticle);
@@ -51,6 +69,11 @@ export default class Article extends Component {
     hashHistory.push('/headlines');
   }
 
+  /**
+   * render
+   * @method
+   * @returns {span} span
+   */
   render() {
     const { article } = this.state;
 

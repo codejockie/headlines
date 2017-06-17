@@ -1,6 +1,5 @@
 import React from 'react';
-import expect from 'expect';
-import TestUtils from 'react-dom/test-utils';
+import { mount, shallow } from 'enzyme';
 
 import HeadlineItem from '../../components/HeadlineItem.jsx';
 
@@ -13,29 +12,31 @@ const article = {
   publishedAt: '2017-05-22T16:15:01Z',
 };
 
-describe('HeadlineItem', () => {
-  it('should exist', () => {
-    expect(HeadlineItem).toExist();
+describe('<HeadlineItem />', () => {
+  it('renders correctly to page', () => {
+    const wrapper = shallow(<HeadlineItem />);
+    expect(wrapper.length).to.equal(1);
   });
 
-  describe('render', () => {
-    it('should render article to page correctly', () => {
-      const headline = TestUtils
-        .renderIntoDocument(<HeadlineItem {...article} />);
-      const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
-      const href = a.getAttribute('href');
+  it('should have an anchor and a button element', () => {
+    const wrapper = mount(<HeadlineItem {...article} />);
+    expect(wrapper.find('a')).to.have.length(1);
+    expect(wrapper.find('button')).to.have.length(1);
+  });
 
-      expect(href).toEqual('https://techcrunch.com/2017/05/22/judah-vs-the-machines/');
-    });
+  it('should have props for author, description, title, url, urlToImage and publishedAt', () => {
+    const wrapper = shallow(<HeadlineItem {...article} />);
+    expect(wrapper.props().author).to.be.defined;
+    expect(wrapper.props().description).to.be.defined;
+    expect(wrapper.props().title).to.be.defined;
+    expect(wrapper.props().url).to.be.defined;
+    expect(wrapper.props().urlToImage).to.be.defined;
+    expect(wrapper.props().publishedAt).to.be.defined;
+  });
 
-    describe('headline exists', () => {
-      const headline = TestUtils
-        .renderIntoDocument(<HeadlineItem {...article} />);
-      const a = TestUtils.findRenderedDOMComponentWithTag(headline, 'a');
-
-      it('should exist', () => {
-        expect(a).toExist();
-      });
-    });
+  it('should have an anchor element with its text attr set', () => {
+    const wrapper = mount(<HeadlineItem {...article} />);
+    expect(wrapper.find('a').text()).to.equal('Read from source');
+    expect(wrapper.find('button').text()).to.equal('Read here');
   });
 });

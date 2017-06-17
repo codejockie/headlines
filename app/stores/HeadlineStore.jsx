@@ -16,7 +16,6 @@ class HeadlineStore extends EventEmitter {
     super();
 
     this.headlines = [];
-    this.error = {};
   }
 
   /**
@@ -28,23 +27,13 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * getHeadlines assigns headlines and emits an event
+   * setHeadlines assigns headlines and emits an event
    * @param {Array} headlines
    * @returns {void}
    */
-  getHeadlines(headlines) {
+  setHeadlines(headlines) {
     this.headlines = headlines;
     this.emit('headline_change');
-  }
-
-  /**
-   * getParsedArticle assigns errors and emits an event
-   * @param {Object} error
-   * @returns {void}
-   */
-  getErrors(error) {
-    this.error = error;
-    this.emit('error');
   }
 
   /**
@@ -54,11 +43,8 @@ class HeadlineStore extends EventEmitter {
    */
   handleActions(action) {
     switch (action.type) {
-      case 'RECEIVE_HEADLINES_ERROR':
-        this.getErrors(action.error);
-        break;
       case 'RECEIVE_HEADLINES':
-        this.getHeadlines(action.headlines);
+        this.setHeadlines(action.headlines);
         break;
 
       default: break;

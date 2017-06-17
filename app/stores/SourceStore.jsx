@@ -27,11 +27,11 @@ class SourceStore extends EventEmitter {
   }
 
   /**
-   * getSources assigns sources and emits an event
+   * setSources assigns sources and emits an event
    * @param {Array} sources
    * @returns {void}
    */
-  getSources(sources) {
+  setSources(sources) {
     this.sources = sources;
     this.emit('source_change');
   }
@@ -44,7 +44,7 @@ class SourceStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'RECEIVE_SOURCES':
-        this.getSources(action.sources);
+        this.setSources(action.sources);
         break;
 
       default: break;

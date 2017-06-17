@@ -2,7 +2,7 @@ import axios from 'axios';
 import expect from 'expect';
 import sinon from 'sinon';
 
-import { loadSources } from '../../actions/SourceActions.jsx';
+import loadSources from '../../actions/SourceActions.jsx';
 import dispatcher from '../../dispatcher.jsx';
 import sampleSources from '../../mock/sampleSources.json';
 

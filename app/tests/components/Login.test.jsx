@@ -1,23 +1,21 @@
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-import expect from 'expect';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import Login from '../../components/Login';
+import Login from '../../components/Login.jsx';
 
-describe('Login', () => {
-  it('renders', () => {
-    const element = TestUtils.renderIntoDocument(<Login />);
-    expect(element).toBeTruthy();
+describe('<Login />', () => {
+  it('renders correctly to page', () => {
+    const wrapper = shallow(<Login />);
+    expect(wrapper.length).to.equal(1);
   });
 
-  it('renders an h1 element', () => {
+  it('should have a title with an h1 element', () => {
     const login = mount(<Login />);
-    expect(login.find('h1').text()).toEqual('Newslines');
+    expect(login.find('h1').text()).to.equal('Newslines');
   });
 
-  it('renders a button element', () => {
+  it('should have two button elements', () => {
     const login = mount(<Login />);
-    expect(login.find('button').text()).toEqual(' Login with Google');
+    expect(login.find('button').length).to.equal(2);
   });
 });
