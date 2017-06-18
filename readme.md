@@ -42,7 +42,7 @@
 +  **[react-share](https://www.npmjs.com/package/react-share)** - Provides social media share icons
 +  **[script-loader](https://www.npmjs.com/package/script-loader)** - A JavaScript loader plugin for webpack
 +  **[style-loader](https://www.npmjs.com/package/style-loader)** - A CSS style loader plugin for webpack
-+  **[webpack](https://www.npmjs.com/package/react-router-dom)** - Used to bundle the app's js and scss files for usage in the browser
++  **[webpack](https://www.npmjs.com/package/webpack)** - Used to bundle the app's js and scss files for usage in the browser
 
 ### Development Dependencies
 The following dependencies are required by the app during development
