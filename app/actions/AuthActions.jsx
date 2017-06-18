@@ -13,7 +13,7 @@ function authenticate(authProvider) {
     .then((result) => {
       dispatcher.dispatch({
         type: 'LOGIN_SUCCESS',
-        uid: result.user.uid,
+        user: result.user,
       });
     }, (error) => {
       dispatcher.dispatch({

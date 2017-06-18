@@ -9,19 +9,17 @@
 
 ## Introduction
 +  **`Newslines`** is a News app written in React.
-+  It has the following features;
++  It has the following features:
    +  Login via Google
    +  Login via GitHub
-   +  Allows users select news sources
-   +  Allows users sort news article based on the following sorting options
+   +  Allow users select news sources
+   +  Allow users sort news article based on the following sorting options
       +  Top
       +  Latest
-   +  Allows users read a news article in-app and from original source
-   +  Allows users share news on social media
+   +  Allow users read a news article in-app and from original source
+   +  Allow users share news article on social media
+   +  Allow users save news article
 +  A live version of the app is deployed on heroku via [here](https://newslines.herokuapp.com)
-
-## Tech Stack
-![Tech Stack](https://drive.google.com/file/d/0B619n1q6JiC1Qy1OTmZNbFM4dWc/view?usp=sharing)
 
 ## Project Dependencies
 
@@ -38,7 +36,8 @@
 +  **[node-sass](https://www.npmjs.com/package/node-sass)**, **[sass-loader](https://www.npmjs.com/package/sass-loader)** - This enables the app to use sass (.scss) directly in scripts
 +  **[node-env-file](https://www.npmjs.com/package/node-env-file)** - Parse and load environment files
 +  **[react](https://www.npmjs.com/package/react)** - It enables the app to use the React architecture
-+  **[react](https://www.npmjs.com/package/react)** - Used with **[react-dom](https://www.npmjs.com/package/react-dom)** enables the app to use the React architecture
++  **[react-alert](https://www.npmjs.com/package/react-alert)** - A simple react alert (toaster style) component
++  **[react-dom](https://www.npmjs.com/package/react-dom)** - This package serves as the entry point of the DOM-related rendering paths. It is intended to be paired with the isomorphic **[React](https://www.npmjs.com/package/react)**
 +  **[react-router](https://www.npmjs.com/package/react-router)** - Used to perform app routing
 +  **[react-share](https://www.npmjs.com/package/react-share)** - Provides social media share icons
 +  **[script-loader](https://www.npmjs.com/package/script-loader)** - A JavaScript loader plugin for webpack
@@ -100,11 +99,14 @@ The following dependencies are required by the app during development
 ## How to contribute
 To contribute, fork this repo to your private repository and create a pull request based on the feature you want to add.
 
-## Limitations
-This app and its functions are limited by time constraint.
+## Disclaimer
+This app and its functions are limited by time constraint and is in no way at its best.
 
-### Troubleshooting & FAQ
-Not available at the moment
+### FAQ
++ Can I fork the repo?
+  + Feel free
++ Can I contribute to the project?
+  + Feel free
 
 ## License
 

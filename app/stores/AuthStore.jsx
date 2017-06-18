@@ -15,6 +15,7 @@ class LoginStore extends EventEmitter {
   constructor() {
     super();
 
+    this.user = {};
     this.userId = '';
   }
 
@@ -29,6 +30,26 @@ class LoginStore extends EventEmitter {
   }
 
   /**
+   * setUser sets the user
+   * @param {Object} user
+   * @returns {void}
+   */
+  setUser(user) {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  /**
+   * unsetUser clears user data and localStorage
+   * @returns {void}
+   */
+  unsetUser() {
+    this.userId = '';
+    this.user = {};
+    localStorage.removeItem('user');
+  }
+
+  /**
    * handleActions switches between actions and handle them accordingly
    * @param {Object} action
    * @returns {void}
@@ -36,10 +57,11 @@ class LoginStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'LOGIN_SUCCESS':
-        this.getUserId(action.uid);
+        this.getUserId(action.user.uid);
+        this.setUser(action.user);
         break;
       case 'LOGOUT_SUCCESS':
-        this.userId = '';
+        this.unsetUser();
         break;
 
       default: break;

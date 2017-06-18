@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
-import { startLogout } from '../actions/LoginActions.jsx';
+import { startLogout } from '../actions/AuthActions.jsx';
 import capitalise from '../helpers/Capitalise.jsx';
 import createOptions from '../helpers/OptionsCreator.jsx';
 import Headline from './Headline.jsx';

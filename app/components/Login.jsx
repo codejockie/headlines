@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Button, Icon, Segment, Header, Divider } from 'semantic-ui-react';
 
-import { startLogin } from '../actions/LoginActions.jsx';
+import { startLogin } from '../actions/AuthActions.jsx';
 import { githubProvider, googleProvider } from '../firebase/index.jsx';
 
 /**
