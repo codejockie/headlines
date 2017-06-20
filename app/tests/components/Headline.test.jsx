@@ -16,7 +16,7 @@ describe('<Headline />', () => {
     expect(dimmer).to.have.length.of(1);
   });
 
-  it('have a <Loader /> component', () => {
+  it('should have a <Loader /> component', () => {
     const wrapper = shallow(<Headline />);
     const loader = wrapper.find(Loader);
     expect(loader).to.have.length.of(1);

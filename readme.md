@@ -8,7 +8,7 @@
 ### Newslines - One stop source for the latest headlines
 
 ## Introduction
-+  **`Newslines`** is a News app written in React.
++  **`Newslines`** is a News Feed app written in React.
 +  It has the following features:
    +  Login via Google
    +  Login via GitHub

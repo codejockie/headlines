@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
+import { Sidebar, Segment, Button, Menu, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
 import { startLogout } from '../actions/AuthActions.jsx';
 import loadHeadlines, { setSourceKey } from '../actions/HeadlineActions.jsx';
@@ -29,9 +29,10 @@ export default class SourceSidebar extends Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
 
-    this.sourceKey = HeadlineStore.getSourceKey() || 'Headlines';
+    this.sourceKey = HeadlineStore.getSourceKey() || 'Newslines';
 
     this.state = {
+      active: false,
       options: [
         {
           key: 'top',
@@ -135,7 +136,7 @@ export default class SourceSidebar extends Component {
    * @returns {void}
    */
   toggleVisibility() {
-    this.setState({ visible: !this.state.visible });
+    this.setState({ visible: !this.state.visible, active: !this.state.active });
   }
 
   /**
@@ -144,35 +145,32 @@ export default class SourceSidebar extends Component {
    * @returns {div} div
    */
   render() {
-    const { options, sources, title, visible } = this.state;
+    const { active, options, sources, title, visible } = this.state;
 
     return (
       <div>
-        <Grid columns={4} centered>
-          <Grid.Column>
-            <Button onClick={this.toggleVisibility}>
+        <Menu attached="top">
+          <Menu.Item>
+            <Button basic toggle active={active} onClick={this.toggleVisibility}>
               <Icon name="sidebar" />
             </Button>
-          </Grid.Column>
-          <Grid.Column>
-            <h1 className="ui header">{title}</h1>
-          </Grid.Column>
-          <Grid.Column>
-            <Dropdown
-              fluid
-              selection
-              search={true}
-              options={options}
-              placeholder='Sort headlines'
-              onChange={this.onChange}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <div className="page-actions">
-              <a href="#logout" className="ui label" onClick={this.onLogout}>Logout</a>
-            </div>
-          </Grid.Column>
-        </Grid>
+          </Menu.Item>
+          <Menu.Menu position='right'>
+            <Menu.Item>
+              <h1 className="ui header">{title}</h1>
+            </Menu.Item>
+            <Menu.Item>
+              <Dropdown
+                selection
+                search={true}
+                options={options}
+                placeholder='Sort headlines'
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+            <Menu.Item name='logout' onClick={this.onLogout} />
+          </Menu.Menu>
+        </Menu>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation="overlay"
                    width="wide" visible={visible}
