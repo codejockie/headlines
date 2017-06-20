@@ -43,6 +43,6 @@ describe('<Sidebar />', () => {
     const wrapper = shallow(<Sidebar />);
     expect(wrapper.state('sources')).to.equal(null);
     expect(wrapper.state('visible')).to.equal(false);
-    expect(wrapper.state('title')).to.equal('Headlines');
+    expect(wrapper.state('title')).to.equal('Newslines');
   });
 });

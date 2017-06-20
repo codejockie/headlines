@@ -5,9 +5,6 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import Article from '../../components/Article.jsx';
 
 describe('<Article />', () => {
-  beforeEach(() => {
-    localStorage.setItem('url', 'http://www.bbc.co.uk/news/election-2017-40154361');
-  });
   it('renders correctly to page', () => {
     const article = shallow(<Article />);
     expect(article.length).to.equal(1);

@@ -2,13 +2,14 @@ import axios from 'axios';
 import expect from 'expect';
 import sinon from 'sinon';
 
-import loadHeadlines from '../../actions/HeadlineActions.jsx';
+import loadHeadlines, { setSourceKey } from '../../actions/HeadlineActions.jsx';
 import dispatcher from '../../dispatcher.jsx';
 import sampleHeadlines from '../../mock/sampleHeadlines.json';
 
 describe('Headline Actions', () => {
   let mockAxios;
   let dispatchSpy;
+  const sourceKey = 'bloomberg';
 
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() => (
@@ -24,6 +25,7 @@ describe('Headline Actions', () => {
   afterEach(() => {
     axios.get.restore();
     dispatcher.dispatch.restore();
+    setSourceKey('');
   });
 
   describe('loadHeadlines', () => {
@@ -39,7 +41,7 @@ describe('Headline Actions', () => {
       });
     });
 
-    it('dispatches an action with sampleHeadlines as headlines data', () => {
+    it('dispatches an action with sampleHeadlines as headlines', () => {
       loadHeadlines().then(() => {
         dispatcher.dispatch({
           type: 'RECEIVE_HEADLINES',
@@ -47,6 +49,14 @@ describe('Headline Actions', () => {
         });
         expect(dispatchSpy.getCall(0).args[0].headlines).toBe(sampleHeadlines);
       });
+    });
+  });
+
+  describe('setSourceKey', () => {
+    it('dispatches an action with url', () => {
+      setSourceKey(sourceKey);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('SOURCE_KEY');
+      expect(dispatchSpy.getCall(0).args[0].sourceKey).toBe(sourceKey);
     });
   });
 });
