@@ -41,5 +41,5 @@ export const getSources = () => makeRequest('sources', 'en', undefined, undefine
  * @returns {func} makeRequest
  */
 export const getHeadlines =
-  (sourceKey = 'reddit-r-all', sortBy = 'top') => makeRequest('articles', undefined, sourceKey, sortBy)
+  (sourceKey, sortBy = 'top') => makeRequest('articles', undefined, sourceKey, sortBy)
     .then(res => res.articles, error => error);

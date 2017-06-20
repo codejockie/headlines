@@ -8,7 +8,7 @@ import { getHeadlines } from '../api/NewsApi.jsx';
  * @param {string} sortBy - The sort arg to filter the headlines.
  * @returns {func} getHeadlines()
  */
-export default function loadHeadlines(sourceKey = 'reddit-r-all', sortBy = 'top') {
+export default function loadHeadlines(sourceKey, sortBy = 'top') {
   return getHeadlines(sourceKey, sortBy).then((headlines) => {
     dispatcher.dispatch({
       type: 'RECEIVE_HEADLINES',
@@ -19,5 +19,18 @@ export default function loadHeadlines(sourceKey = 'reddit-r-all', sortBy = 'top'
         error,
       });
     });
+  });
+}
+
+/**
+ * setSourceKey: sets the initial news source
+ * @function
+ * @param {string} sourceKey
+ * @returns {void}
+ */
+export function setSourceKey(sourceKey) {
+  dispatcher.dispatch({
+    type: 'SOURCE_KEY',
+    sourceKey,
   });
 }

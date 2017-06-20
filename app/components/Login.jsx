@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Grid, Button, Icon, Segment, Header, Divider } from 'semantic-ui-react';
+import { Grid, Button, Dropdown, Icon, Segment, Header, Divider } from 'semantic-ui-react';
 
-import { startLogin } from '../actions/AuthActions.jsx';
 import { githubProvider, googleProvider } from '../firebase/index.jsx';
+import { startLogin } from '../actions/AuthActions.jsx';
+import { setSourceKey } from '../actions/HeadlineActions.jsx';
+import loadSources from '../actions/SourceActions.jsx';
+import SourceStore from '../stores/SourceStore.jsx';
 
 /**
  * Login Component
@@ -11,12 +14,72 @@ import { githubProvider, googleProvider } from '../firebase/index.jsx';
 export default class Login extends Component {
   /**
    * @constructor
+   *
+   * @param {Object} props
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      sources: null,
+      isFetching: true,
+    };
+
+    this.getSources = this.getSources.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onGoogleLogin = this.onGoogleLogin.bind(this);
     this.onGitHubLogin = this.onGitHubLogin.bind(this);
+  }
+
+  /**
+   * componentDidMount
+   * @method
+   * @returns {void}
+   */
+  componentDidMount() {
+    loadSources();
+    SourceStore.on('source_change', this.getSources);
+  }
+
+  /**
+   * componentWillUnmount
+   * @method
+   * @returns {void}
+   */
+  componentWillUnmount() {
+    SourceStore.removeListener('source_change', this.getSources);
+  }
+
+  /**
+   * getSources sets the state of the component with that of the fetched sources.
+   * @method
+   * @returns {void}
+   */
+  getSources() {
+    let sources = SourceStore.getAll();
+    sources = sources.map(source => (
+      {
+        key: source.id,
+        text: source.name,
+        value: source.id,
+      }
+    ));
+    this.setState({
+      sources,
+      isFetching: false,
+    });
+  }
+
+  /**
+   * onChange: sets the default news source
+   * @method
+   * @param {Object} e
+   * @param {Object} data
+   * @returns {void}
+   */
+  onChange(e, data) {
+    e.preventDefault();
+    setSourceKey(data.value);
   }
 
   /**
@@ -43,10 +106,21 @@ export default class Login extends Component {
    * @returns {Grid} Grid
    */
   render() {
+    const { isFetching, sources } = this.state;
     return (
       <Grid centered columns={4}>
         <Grid.Column>
           <div className="content">
+            <Dropdown
+              fluid
+              search={true}
+              options={sources}
+              placeholder='Select News Source'
+              onChange={this.onChange}
+              onSearchChange={this.onChange}
+              disabled={isFetching}
+              loading={isFetching}
+            />
             <Segment>
               <Header as="h1" textAlign="center">Newslines</Header>
               <Header as="h2" icon textAlign="center">

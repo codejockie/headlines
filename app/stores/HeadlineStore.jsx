@@ -16,6 +16,7 @@ class HeadlineStore extends EventEmitter {
     super();
 
     this.headlines = [];
+    this.sourceKey = '';
   }
 
   /**
@@ -24,6 +25,14 @@ class HeadlineStore extends EventEmitter {
    */
   getAll() {
     return this.headlines;
+  }
+
+  /**
+   * getSourceKey returns all sources
+   * @returns {string} sourceKey
+   */
+  getSourceKey() {
+    return this.sourceKey;
   }
 
   /**
@@ -37,6 +46,15 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
+   * setSourceKey: sets the sourceKey
+   * @param {string} sourceKey
+   * @returns {void}
+   */
+  setSourceKey(sourceKey) {
+    this.sourceKey = sourceKey;
+  }
+
+  /**
    * handleActions switches between actions and handle them accordingly
    * @param {Object} action
    * @returns {void}
@@ -45,6 +63,9 @@ class HeadlineStore extends EventEmitter {
     switch (action.type) {
       case 'RECEIVE_HEADLINES':
         this.setHeadlines(action.headlines);
+        break;
+      case 'SOURCE_KEY':
+        this.setSourceKey(action.sourceKey);
         break;
 
       default: break;
