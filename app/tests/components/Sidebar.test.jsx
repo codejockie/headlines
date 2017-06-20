@@ -31,7 +31,7 @@ describe('<Sidebar />', () => {
 
   it('should have a title', () => {
     const wrapper = mount(<Sidebar />);
-    expect(wrapper.find('h1').text()).to.equal('Today\'s Headlines');
+    expect(wrapper.find('h1')).to.have.length.of(1);
   });
 
   it('should have sorting options', () => {
@@ -43,6 +43,6 @@ describe('<Sidebar />', () => {
     const wrapper = shallow(<Sidebar />);
     expect(wrapper.state('sources')).to.equal(null);
     expect(wrapper.state('visible')).to.equal(false);
-    expect(wrapper.state('title')).to.equal('Today\'s Headlines');
+    expect(wrapper.state('title')).to.equal('Headlines');
   });
 });

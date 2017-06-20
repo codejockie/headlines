@@ -47,7 +47,7 @@ export default class Article extends Component {
    * @returns {void}
    */
   componentDidMount() {
-    const url = localStorage.getItem('url');
+    const url = ArticleStore.getUrl();
     const user = Object.keys(AuthStore.user).length !== 0 ?
       AuthStore.user : JSON.parse(localStorage.getItem('user'));
     getArticle(url);

@@ -14,6 +14,7 @@ class ArticleStore extends EventEmitter {
   constructor() {
     super();
     this.article = {};
+    this.url = '';
   }
 
   /**
@@ -22,6 +23,23 @@ class ArticleStore extends EventEmitter {
    */
   getParsedArticle() {
     return this.article;
+  }
+
+  /**
+   * getUrl: returns the url for scraping
+   * @returns {string} url
+   */
+  getUrl() {
+    return this.url;
+  }
+
+  /**
+   * setArticleUrl returns article
+   * @param {string} url
+   * @returns {article} article
+   */
+  setArticleUrl(url) {
+    this.url = url;
   }
 
   /**
@@ -34,6 +52,9 @@ class ArticleStore extends EventEmitter {
       case 'RECEIVE_ARTICLE':
         this.article = action.article;
         this.emit('article_change');
+        break;
+      case 'ARTICLE_URL':
+        this.setArticleUrl(action.url);
         break;
 
       default: break;
