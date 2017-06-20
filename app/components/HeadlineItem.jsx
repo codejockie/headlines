@@ -1,9 +1,9 @@
 import React from 'react';
-import { Proptypes } from 'prop-types';
 import { Button, Card, Image } from 'semantic-ui-react';
 import { hashHistory } from 'react-router';
 
-import formatDate from '../helpers/DateFormatter';
+import formatDate from '../helpers/DateFormatter.jsx';
+import { setArticleUrl } from '../actions/ArticleActions.jsx';
 
 /**
  * HeadlineItem is a stateless component function.
@@ -15,11 +15,12 @@ import formatDate from '../helpers/DateFormatter';
  * @param {Date} publishedAt
  * @returns {Card} Card
  */
-function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
+export default function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
   const onClick = (e) => {
     e.preventDefault();
 
-    localStorage.setItem('url', url);
+    // sets the url that's later passed to the getArticle method used for scraping
+    setArticleUrl(url);
     hashHistory.push('/article');
   };
 
@@ -50,5 +51,3 @@ function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
     </Card>
   );
 }
-
-export default HeadlineItem;

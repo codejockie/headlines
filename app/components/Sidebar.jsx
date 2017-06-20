@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Grid, Icon, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 
 import { startLogout } from '../actions/AuthActions.jsx';
+import loadHeadlines, { setSourceKey } from '../actions/HeadlineActions.jsx';
+import loadSources from '../actions/SourceActions.jsx';
 import capitalise from '../helpers/Capitalise.jsx';
 import createOptions from '../helpers/OptionsCreator.jsx';
 import Headline from './Headline.jsx';
-import loadHeadlines from '../actions/HeadlineActions.jsx';
-import loadSources from '../actions/SourceActions.jsx';
 import SourceItem from './SourceItem.jsx';
+import HeadlineStore from '../stores/HeadlineStore.jsx';
 import SourceStore from '../stores/SourceStore.jsx';
 
 /**
@@ -28,6 +29,8 @@ export default class SourceSidebar extends Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
 
+    this.sourceKey = HeadlineStore.getSourceKey() || 'Headlines';
+
     this.state = {
       options: [
         {
@@ -47,10 +50,8 @@ export default class SourceSidebar extends Component {
       ],
       sources: null,
       visible: false,
-      title: 'Today\'s Headlines',
+      title: capitalise(this.sourceKey),
     };
-
-    this.sourceKey = 'reddit-r-all';
   }
 
   /**
@@ -118,6 +119,7 @@ export default class SourceSidebar extends Component {
    */
   handleClick(sourceId, sortBysAvailable) {
     loadHeadlines(sourceId);
+    setSourceKey(sourceId);
     this.sourceKey = sourceId;
 
     this.setState({
@@ -156,14 +158,13 @@ export default class SourceSidebar extends Component {
             <h1 className="ui header">{title}</h1>
           </Grid.Column>
           <Grid.Column>
-            <Dropdown text='Sort headlines'
-                      floating
-                      labeled
-                      button
-                      className='icon'
-                      icon='sort'
-                      options={options}
-                      onChange={this.onChange}
+            <Dropdown
+              fluid
+              selection
+              search={true}
+              options={options}
+              placeholder='Sort headlines'
+              onChange={this.onChange}
             />
           </Grid.Column>
           <Grid.Column>

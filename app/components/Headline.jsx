@@ -19,6 +19,8 @@ export default class Headline extends React.Component {
 
     this.getHeadlines = this.getHeadlines.bind(this);
 
+    this.sourceKey = HeadlineStore.getSourceKey() || 'reddit-r-all';
+
     this.state = {
       headlines: null,
     };
@@ -30,7 +32,7 @@ export default class Headline extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    loadHeadlines();
+    loadHeadlines(this.sourceKey);
 
     HeadlineStore.on('headline_change', this.getHeadlines);
   }

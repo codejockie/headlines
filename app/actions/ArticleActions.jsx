@@ -21,3 +21,16 @@ export default function getArticle(url) {
     });
   });
 }
+
+/**
+ * setArticleUrl: sets the url for the getArticle function
+ * @function
+ * @param {string} url
+ * @returns {void}
+ */
+export function setArticleUrl(url) {
+  dispatcher.dispatch({
+    type: 'ARTICLE_URL',
+    url
+  });
+}
