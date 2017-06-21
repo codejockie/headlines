@@ -1,3 +1,15 @@
+iframe {
+  max-width: $max_width;
+}
+
 img {
-  max-width: 590px;
+  max-width: $max_width;
+}
+
+video {
+  max-width: $max_width;
+}
+
+embed {
+  max-width: $max_width;
 }

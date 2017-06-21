@@ -40,13 +40,14 @@ class LoginStore extends EventEmitter {
   }
 
   /**
-   * unsetUser clears user data and localStorage
+   * clearAll clears user data and localStorage
    * @returns {void}
    */
-  unsetUser() {
+  clearAll() {
     this.userId = '';
     this.user = {};
     localStorage.removeItem('user');
+    localStorage.removeItem('sourceKey');
   }
 
   /**
@@ -61,7 +62,7 @@ class LoginStore extends EventEmitter {
         this.setUser(action.user);
         break;
       case 'LOGOUT_SUCCESS':
-        this.unsetUser();
+        this.clearAll();
         break;
 
       default: break;

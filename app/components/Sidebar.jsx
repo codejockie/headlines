@@ -29,27 +29,13 @@ export default class SourceSidebar extends Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
 
-    this.sourceKey = HeadlineStore.getSourceKey() || 'Newslines';
+    this.sourceKey = HeadlineStore.getSourceKey() || localStorage.getItem('sourceKey');
 
     this.state = {
       active: false,
-      options: [
-        {
-          key: 'top',
-          icon: 'line chart',
-          text: 'Top',
-          value: 'top',
-          content: 'Top',
-        },
-        {
-          key: 'latest',
-          icon: 'newspaper',
-          text: 'Latest',
-          value: 'latest',
-          content: 'Latest',
-        },
-      ],
+      options: [],
       sources: null,
+      user: JSON.parse(localStorage.getItem('user')),
       visible: false,
       title: capitalise(this.sourceKey),
     };
@@ -91,17 +77,14 @@ export default class SourceSidebar extends Component {
   /**
    * onLogout initiates the logout process.
    * @method
-   * @param {string} e
    * @returns {void}
    */
-  onLogout(e) {
-    e.preventDefault();
-
+  onLogout() {
     startLogout();
   }
 
   /**
-   * getSources sets the state of the component with that of the fetched sources.
+   * getSources: sets the state of the component with that of the fetched sources.
    * @method
    * @returns {void}
    */
@@ -109,6 +92,27 @@ export default class SourceSidebar extends Component {
     this.setState({
       sources: SourceStore.getAll(),
     });
+
+    const { sources } = this.state;
+    this.getOptions(sources);
+  }
+
+  /**
+   * getOptions: sets the options
+   * @method
+   * @param  {Object} sources
+   * @returns {Array} sortBysAvailable
+   */
+  getOptions(sources) {
+    const sortBysAvailable = sources.filter(source => source.id === this.sourceKey)
+      .map(option => option.sortBysAvailable)
+      .reduce((a, b) => a.concat(b), []);
+
+    if (sortBysAvailable) {
+      this.setState({
+        options: createOptions(sortBysAvailable),
+      });
+    }
   }
 
   /**
@@ -145,7 +149,7 @@ export default class SourceSidebar extends Component {
    * @returns {div} div
    */
   render() {
-    const { active, options, sources, title, visible } = this.state;
+    const { active, options, sources, title, visible, user } = this.state;
 
     return (
       <div>
@@ -167,6 +171,9 @@ export default class SourceSidebar extends Component {
                 placeholder='Sort headlines'
                 onChange={this.onChange}
               />
+            </Menu.Item>
+            <Menu.Item>
+              <img className="jk-img-circle" src={user.photoURL} />
             </Menu.Item>
             <Menu.Item name='logout' onClick={this.onLogout} />
           </Menu.Menu>
