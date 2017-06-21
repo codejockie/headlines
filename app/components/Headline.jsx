@@ -19,7 +19,7 @@ export default class Headline extends React.Component {
 
     this.getHeadlines = this.getHeadlines.bind(this);
 
-    this.sourceKey = HeadlineStore.getSourceKey() || 'reddit-r-all';
+    this.sourceKey = HeadlineStore.getSourceKey() || localStorage.getItem('sourceKey');
 
     this.state = {
       headlines: null,

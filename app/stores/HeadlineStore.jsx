@@ -52,6 +52,7 @@ class HeadlineStore extends EventEmitter {
    */
   setSourceKey(sourceKey) {
     this.sourceKey = sourceKey;
+    localStorage.setItem('sourceKey', sourceKey);
   }
 
   /**

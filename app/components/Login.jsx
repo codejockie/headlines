@@ -23,6 +23,7 @@ export default class Login extends Component {
     this.state = {
       sources: null,
       isFetching: true,
+      disabled: true,
     };
 
     this.getSources = this.getSources.bind(this);
@@ -79,6 +80,9 @@ export default class Login extends Component {
    */
   onChange(e, data) {
     e.preventDefault();
+    this.setState({
+      disabled: false,
+    });
     setSourceKey(data.value);
   }
 
@@ -106,7 +110,7 @@ export default class Login extends Component {
    * @returns {Grid} Grid
    */
   render() {
-    const { isFetching, sources } = this.state;
+    const { disabled, isFetching, sources } = this.state;
     return (
       <Grid centered columns={4}>
         <Grid.Column>
@@ -127,12 +131,14 @@ export default class Login extends Component {
                 <Icon name="user" circular />
               </Header>
               <Divider section hidden />
-              <Button color="google plus" fluid onClick={this.onGoogleLogin}>
-                <Icon name="google plus" /> Login with Google
+              <Button color="google plus" disabled={disabled} fluid onClick={this.onGoogleLogin}>
+                <Icon name="google plus" />
+                Login with Google
               </Button>
               <Divider horizontal>Or</Divider>
-              <Button color="green" fluid onClick={this.onGitHubLogin}>
-                <Icon name="github" /> Login with GitHub
+              <Button color="green" disabled={disabled} fluid onClick={this.onGitHubLogin}>
+                <Icon name="github" />
+                Login with GitHub
               </Button>
             </Segment>
           </div>
