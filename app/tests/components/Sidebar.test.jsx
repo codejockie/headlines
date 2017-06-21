@@ -40,9 +40,11 @@ describe('<Sidebar />', () => {
   });
 
   it('should have an initial sources, visible and title state', () => {
+    localStorage.setItem('sourceKey', 'newslines');
     const wrapper = shallow(<Sidebar />);
     expect(wrapper.state('sources')).to.equal(null);
     expect(wrapper.state('visible')).to.equal(false);
     expect(wrapper.state('title')).to.equal('Newslines');
+    localStorage.removeItem('sourceKey');
   });
 });
