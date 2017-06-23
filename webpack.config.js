@@ -6,7 +6,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 try {
   envFile(path.join(__dirname, `config/${process.env.NODE_ENV}.env`));
-} catch (e) {
+} catch (error) {
   /**/
 }
 
@@ -34,7 +34,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
+        test: /(\.js$|\.jsx$)/,
         exclude: /(node_modules|bower_components)/,
         use: [
           {

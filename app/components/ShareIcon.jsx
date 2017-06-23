@@ -18,7 +18,7 @@ const {
  * @function
  * @returns {div} div
  */
-export default function ({ url, title }) {
+export default function ShareIcon({ url, title }) {
   return (
     <div className="share-container">
       <div className="social-share">

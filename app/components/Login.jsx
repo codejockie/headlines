@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { Grid, Button, Dropdown, Icon, Segment, Header, Divider } from 'semantic-ui-react';
 
-import { githubProvider, googleProvider } from '../firebase/index.jsx';
-import { startLogin } from '../actions/AuthActions.jsx';
-import { setSourceKey } from '../actions/HeadlineActions.jsx';
-import loadSources from '../actions/SourceActions.jsx';
-import SourceStore from '../stores/SourceStore.jsx';
+import { githubProvider, googleProvider } from '../firebase/index';
+import { startLogin } from '../actions/AuthActions';
+import { setSourceKey } from '../actions/HeadlineActions';
+import loadSources from '../actions/SourceActions';
+import SourceStore from '../stores/SourceStore';
 
 /**
  * Login Component
  * @class
+ * @extends React.Component
  */
 export default class Login extends Component {
   /**
    * @constructor
-   *
    * @param {Object} props
    */
   constructor(props) {
@@ -52,7 +52,7 @@ export default class Login extends Component {
   }
 
   /**
-   * getSources sets the state of the component with that of the fetched sources.
+   * getSources: sets the state of the component with that of the fetched sources.
    * @method
    * @returns {void}
    */
@@ -74,12 +74,12 @@ export default class Login extends Component {
   /**
    * onChange: sets the default news source
    * @method
-   * @param {Object} e
-   * @param {Object} data
+   * @param {Object} event The event properties
+   * @param {Object} data The event data
    * @returns {void}
    */
-  onChange(e, data) {
-    e.preventDefault();
+  onChange(event, data) {
+    event.preventDefault();
     this.setState({
       disabled: false,
     });
@@ -87,7 +87,7 @@ export default class Login extends Component {
   }
 
   /**
-   * onGoogleLogin initiates login process with Google.
+   * onGoogleLogin: initiates login process with Google.
    * @method
    * @returns {void}
    */
@@ -96,7 +96,7 @@ export default class Login extends Component {
   }
 
   /**
-   * onGitHubLogin initiates login process with GitHub.
+   * onGitHubLogin: initiates login process with GitHub.
    * @method
    * @returns {void}
    */
@@ -117,11 +117,10 @@ export default class Login extends Component {
           <div className="content">
             <Dropdown
               fluid
-              search={true}
+              search
               options={sources}
               placeholder='Select News Source'
               onChange={this.onChange}
-              onSearchChange={this.onChange}
               disabled={isFetching}
               loading={isFetching}
             />
