@@ -2,9 +2,8 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
   config.set({
-    browsers: [process.env.CI ?
-      process.env.Travis ? 'Chrome' : 'Chrome' : 'Chrome'],
-    browserNoActivityTimeout: 30000,
+    browsers: [process.env.CI ? 'Chrome' : 'Chrome'],
+    browserNoActivityTimeout: 10000,
     singleRun: true,
     frameworks: [
       'mocha',
@@ -31,7 +30,7 @@ module.exports = function (config) {
     },
     client: {
       mocha: {
-        timeout: '5000',
+        timeout: '10000',
       },
     },
     webpack: webpackConfig,
