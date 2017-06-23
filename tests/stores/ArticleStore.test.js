@@ -4,7 +4,7 @@ import dispatcher from '../../app/dispatcher';
 
 const url = 'https://techcrunch.com/2017/05/22/judah-vs-the-machines/';
 describe('Article Store', () => {
-  describe('case RECEiVE_HEADLINES', () => {
+  describe('case RECEIVE_HEADLINES', () => {
     beforeEach(() => {
       dispatcher.dispatch({
         type: 'RECEIVE_ARTICLE',

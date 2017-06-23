@@ -2,8 +2,7 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
   config.set({
-    browsers: [process.env.CI ? 'Firefox' : 'Chrome'],
-    browserNoActivityTimeout: 10000,
+    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
     singleRun: true,
     frameworks: [
       'mocha',
@@ -12,15 +11,15 @@ module.exports = function (config) {
     ],
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
-      'app/actions/*.jsx',
-      'app/stores/*.jsx',
+      'app/actions/*.js',
+      'app/stores/*.js',
       'app/components/*.jsx',
       'tests.webpack.js',
     ],
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap'],
-      'app/actions/*.jsx': ['webpack', 'sourcemap', 'coverage'],
-      'app/stores/*.jsx': ['webpack', 'sourcemap', 'coverage'],
+      'app/actions/*.js': ['webpack', 'sourcemap', 'coverage'],
+      'app/stores/*.js': ['webpack', 'sourcemap', 'coverage'],
       'app/components/*.jsx': ['webpack', 'sourcemap', 'coverage'],
     },
     reporters: ['mocha', 'coverage', 'coveralls'],
@@ -30,7 +29,7 @@ module.exports = function (config) {
     },
     client: {
       mocha: {
-        timeout: '10000',
+        timeout: '5000',
       },
     },
     webpack: webpackConfig,

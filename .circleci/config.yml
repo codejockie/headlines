@@ -4,8 +4,6 @@ jobs:
     working_directory: ~/headlines
     docker:
       - image: circleci/node:4.8.2
-        env:
-          - DISPLAY=:99
       - image: mongo:3.4.4
     steps:
       - checkout
@@ -23,7 +21,7 @@ jobs:
             - .node_modules
       - run:
           name: test
-          command: xvfb-run npm test
+          command: npm test
       - run:
           name: code-coverage
           command: 'cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js'
