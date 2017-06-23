@@ -22,7 +22,7 @@ const makeRequest = (path, lang, sourceKey, sortBy) => {
   }
 
   return axios.get(requestUrl)
-    .then(res => res.data, res => res.data);
+    .then(response => response.data, response => response.data);
 };
 
 /**
@@ -31,7 +31,7 @@ const makeRequest = (path, lang, sourceKey, sortBy) => {
  * @returns {Promise} Promise
  */
 export const getSources = () => makeRequest('sources', 'en', undefined, undefined)
-  .then(res => res.sources, error => error);
+  .then(response => response.sources, error => error);
 
 /**
  * getHeadlines: retrieves the headlines from the API
@@ -42,4 +42,4 @@ export const getSources = () => makeRequest('sources', 'en', undefined, undefine
  */
 export const getHeadlines =
   (sourceKey, sortBy = 'top') => makeRequest('articles', undefined, sourceKey, sortBy)
-    .then(res => res.articles, error => error);
+    .then(response => response.articles, error => error);
