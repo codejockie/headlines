@@ -6,7 +6,6 @@ jobs:
       - image: circleci/node:4.8.2
         env:
           - DISPLAY=:99
-          - CHROME_BIN=/usr/bin/google-chrome
       - image: mongo:3.4.4
     steps:
       - checkout

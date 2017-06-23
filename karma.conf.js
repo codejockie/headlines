@@ -2,7 +2,7 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
   config.set({
-    browsers: [process.env.CI ? 'Chrome' : 'Chrome'],
+    browsers: [process.env.CI ? 'Firefox' : 'Chrome'],
     browserNoActivityTimeout: 10000,
     singleRun: true,
     frameworks: [
