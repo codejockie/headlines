@@ -2,7 +2,9 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
   config.set({
-    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
+    browsers: [process.env.CI ?
+      process.env.Travis ? 'Chrome' : 'Chrome' : 'Chrome'],
+    browserNoActivityTimeout: 30000,
     singleRun: true,
     frameworks: [
       'mocha',
