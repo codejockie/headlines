@@ -1,13 +1,14 @@
 import React from 'react';
 import { Card, Dimmer, Loader } from 'semantic-ui-react';
 
-import loadHeadlines from '../actions/HeadlineActions.jsx';
+import loadHeadlines from '../actions/HeadlineActions';
 import HeadlineItem from './HeadlineItem.jsx';
-import HeadlineStore from '../stores/HeadlineStore.jsx';
+import HeadlineStore from '../stores/HeadlineStore';
 
 /**
  * Headline
  * @class
+ * @extends React.Component
  */
 export default class Headline extends React.Component {
   /**
@@ -19,6 +20,7 @@ export default class Headline extends React.Component {
 
     this.getHeadlines = this.getHeadlines.bind(this);
 
+    /** @type {string} */
     this.sourceKey = HeadlineStore.getSourceKey() || localStorage.getItem('sourceKey');
 
     this.state = {
@@ -33,7 +35,6 @@ export default class Headline extends React.Component {
    */
   componentDidMount() {
     loadHeadlines(this.sourceKey);
-
     HeadlineStore.on('headline_change', this.getHeadlines);
   }
 
@@ -47,7 +48,7 @@ export default class Headline extends React.Component {
   }
 
   /**
-   * getHeadlines sets the state with the fetched headlines.
+   * getHeadlines: sets the state with the fetched headlines.
    * @method
    * @returns {void}
    */

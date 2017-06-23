@@ -3,15 +3,15 @@ import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 
 import App from '../components/App.jsx';
 import Article from '../components/Article.jsx';
-import firebase from '../firebase/index.jsx';
+import firebase from '../firebase/index';
 import Login from '../components/Login.jsx';
 
 /**
- * requireLogin checks for a currently logged in user
+ * requireLogin: checks for a currently logged in user
  * @function
- * @param {string} nextState
- * @param {string} replace
- * @param {string} next
+ * @param {string} nextState The next state
+ * @param {string} replace Navigates the app
+ * @param {string} next Allows continuation
  * @returns {void}
  */
 const requireLogin = (nextState, replace, next) => {
@@ -22,11 +22,11 @@ const requireLogin = (nextState, replace, next) => {
 };
 
 /**
- * redirectIfLogged redirect a user if there's a currently logged in user
+ * redirectIfLogged: redirect a user if there's a currently logged in user
  * @function
- * @param {string} nextState
- * @param {string} replace
- * @param {string} next
+ * @param {string} nextState The next state
+ * @param {string} replace Navigates the app
+ * @param {string} next Allows continuation
  * @returns {void}
  */
 const redirectIfLoggedIn = (nextState, replace, next) => {

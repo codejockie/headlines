@@ -2,22 +2,27 @@ import React from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import { hashHistory } from 'react-router';
 
-import formatDate from '../helpers/DateFormatter.jsx';
-import { setArticleUrl } from '../actions/ArticleActions.jsx';
+import formatDate from '../helpers/DateFormatter';
+import { setArticleUrl } from '../actions/ArticleActions';
 
 /**
  * HeadlineItem is a stateless component function.
- * @function
- * @param {string} title
- * @param {string} description
- * @param {string} url
- * @param {string} urlToImage
- * @param {Date} publishedAt
+ * @constructor
+ * @param {string} title The title of the article
+ * @param {string} description The article's description
+ * @param {string} url The url to the article
+ * @param {string} urlToImage The article's image url
+ * @param {Date} publishedAt The date article was published
  * @returns {Card} Card
  */
 export default function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
-  const onClick = (e) => {
-    e.preventDefault();
+  /**
+   * onClick: handles the navigation to the Article component
+   * @param {Object} event The event properties
+   * @return {void}
+   */
+  const onClick = (event) => {
+    event.preventDefault();
 
     // sets the url that's later passed to the getArticle method used for scraping
     setArticleUrl(url);

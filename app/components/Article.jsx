@@ -3,11 +3,11 @@ import AlertContainer from 'react-alert';
 import { hashHistory } from 'react-router';
 import { Button, Container, Dimmer, Divider, Header, Loader, Segment } from 'semantic-ui-react';
 
-import ArticleStore from '../stores/ArticleStore.jsx';
-import getArticle from '../actions/ArticleActions.jsx';
-import { firebaseRef } from '../firebase/index.jsx';
-import formatDate from '../helpers/DateFormatter.jsx';
-import AuthStore from '../stores/AuthStore.jsx';
+import ArticleStore from '../stores/ArticleStore';
+import getArticle from '../actions/ArticleActions';
+import { firebaseRef } from '../firebase/index';
+import formatDate from '../helpers/DateFormatter';
+import AuthStore from '../stores/AuthStore';
 import ShareIcon from './ShareIcon.jsx';
 
 const alertOptions = {
@@ -21,11 +21,12 @@ const alertOptions = {
 /**
  * Article Component
  * @class
+ * @extends React.Component
  */
 export default class Article extends Component {
   /**
    * @constructor
-   * @param {Object} props
+   * @param {Object} props Properties of the class
    */
   constructor(props) {
     super(props);
@@ -36,8 +37,8 @@ export default class Article extends Component {
 
     this.state = {
       article: null,
-      userId: '',
       disabled: false,
+      userId: '',
     };
   }
 
@@ -67,7 +68,7 @@ export default class Article extends Component {
   }
 
   /**
-   * getArticle sets the state with the scraped article.
+   * getArticle: sets the state with the scraped article.
    * @method
    * @returns {void}
    */
@@ -78,9 +79,9 @@ export default class Article extends Component {
   }
 
   /**
-   * setUser sets the state for userId.
+   * setUser: sets the state for userId.
    * @method
-   * @param {Object} user
+   * @param {Object} user The user object from the AuthStore
    * @returns {void}
    */
   setUser(user) {
@@ -90,7 +91,7 @@ export default class Article extends Component {
   }
 
   /**
-   * handleClick method for returning to the headlines.
+   * handleClick: redirects back to the headlines route.
    * @method
    * @returns {void}
    */
@@ -99,7 +100,7 @@ export default class Article extends Component {
   }
 
   /**
-   * showAlert method for returning to the headlines.
+   * showAlert: shows alert when an article is saved.
    * @method
    * @returns {void}
    */
@@ -108,7 +109,7 @@ export default class Article extends Component {
   }
 
   /**
-   * storeArticle saves scraped article to the DB.
+   * storeArticle: saves scraped article to the DB.
    * @method
    * @returns {void}
    */

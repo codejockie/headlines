@@ -3,14 +3,12 @@ import React from 'react';
 import SourceSidebar from './Sidebar.jsx';
 
 /**
- * App Component
- * @returns {JSX} JSX
+ * App Component Stateless component
  * @constructor
+ * @returns {html} html
  */
-function App() {
+export default function App() {
   return (
     <SourceSidebar />
   );
 }
-
-export default App;

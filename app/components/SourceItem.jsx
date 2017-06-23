@@ -4,6 +4,7 @@ import { Menu } from 'semantic-ui-react';
 /**
  * SourceItem
  * @class
+ * @extends React.Component
  */
 export default class SourceItem extends Component {
   /**
@@ -19,7 +20,7 @@ export default class SourceItem extends Component {
   /**
    * onClick passes the id of the selected news source to its parent component (Sidebar)
    * @method
-   * @param {string} event
+   * @param {string} event The event properties
    * @returns {void}
    */
   onClick(event) {
