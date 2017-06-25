@@ -63,7 +63,6 @@ export default class Article extends Component {
    * @returns {void}
    */
   componentWillUnmount() {
-    localStorage.removeItem('url');
     ArticleStore.removeListener('article_change', this.getArticle);
   }
 
@@ -119,6 +118,7 @@ export default class Article extends Component {
       title: article.title,
       content: article.content,
       date_published: formatDate(article.date_published),
+      date_added: formatDate(new Date().getDate()),
       lead_image_url: article.lead_image_url,
       dek: article.dek,
       url: article.url,

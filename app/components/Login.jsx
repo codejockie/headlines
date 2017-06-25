@@ -28,8 +28,6 @@ export default class Login extends Component {
 
     this.getSources = this.getSources.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onGoogleLogin = this.onGoogleLogin.bind(this);
-    this.onGitHubLogin = this.onGitHubLogin.bind(this);
   }
 
   /**
@@ -87,21 +85,13 @@ export default class Login extends Component {
   }
 
   /**
-   * onGoogleLogin: initiates login process with Google.
+   * onLogin: passed an auth provider, it initiates the auth process for the supplied provider
    * @method
+   * @param {Object} authProvider The authentication provider to use
    * @returns {void}
    */
-  onGoogleLogin() {
-    startLogin(googleProvider);
-  }
-
-  /**
-   * onGitHubLogin: initiates login process with GitHub.
-   * @method
-   * @returns {void}
-   */
-  onGitHubLogin() {
-    startLogin(githubProvider);
+  onLogin(authProvider) {
+    startLogin(authProvider);
   }
 
   /**
@@ -130,12 +120,18 @@ export default class Login extends Component {
                 <Icon name="user" circular />
               </Header>
               <Divider section hidden />
-              <Button color="google plus" disabled={disabled} fluid onClick={this.onGoogleLogin}>
+              <Button color="google plus"
+                      disabled={disabled}
+                      fluid
+                      onClick={this.onLogin.bind(null, googleProvider)}>
                 <Icon name="google plus" />
                 Login with Google
               </Button>
               <Divider horizontal>Or</Divider>
-              <Button color="green" disabled={disabled} fluid onClick={this.onGitHubLogin}>
+              <Button color="green"
+                      disabled={disabled}
+                      fluid
+                      onClick={this.onLogin.bind(null, githubProvider)}>
                 <Icon name="github" />
                 Login with GitHub
               </Button>
