@@ -15,7 +15,7 @@ import { setArticleUrl } from '../actions/ArticleActions';
  * @param {Date} publishedAt The date article was published
  * @returns {Card} Card
  */
-export default function HeadlineItem({ title, description, url, urlToImage, publishedAt }) {
+export default function HeadlineItem({ description, publishedAt, title, url, urlToImage }) {
   /**
    * onClick: handles the navigation to the Article component
    * @param {Object} event The event properties
@@ -34,7 +34,7 @@ export default function HeadlineItem({ title, description, url, urlToImage, publ
       <Image src={urlToImage} />
       <Card.Content>
         <Card.Header>
-          {title}
+          <span dangerouslySetInnerHTML={{ __html: title }} />
         </Card.Header>
         <Card.Meta>
           <span className="date">
@@ -42,7 +42,7 @@ export default function HeadlineItem({ title, description, url, urlToImage, publ
           </span>
         </Card.Meta>
         <Card.Description>
-          {description}
+          <span dangerouslySetInnerHTML={{ __html: description }} />
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

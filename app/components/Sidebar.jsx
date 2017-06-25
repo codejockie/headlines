@@ -175,7 +175,7 @@ export default class SourceSidebar extends Component {
               />
             </Menu.Item>
             <Menu.Item>
-              <img className="jk-img-circle" src={user.photoURL} />
+              <img className="jk-img-circle" src={user.photoURL} title={user.displayName} />
             </Menu.Item>
             <Menu.Item name='logout' onClick={this.onLogout} />
           </Menu.Menu>
