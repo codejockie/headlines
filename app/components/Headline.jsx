@@ -6,12 +6,13 @@ import HeadlineItem from './HeadlineItem.jsx';
 import HeadlineStore from '../stores/HeadlineStore';
 
 /**
- * Headline
- * @class
+ * @class Headline
  * @extends React.Component
  */
 export default class Headline extends React.Component {
   /**
+   * @description Creates an instance of Headline
+   * @memberOf Headline
    * @constructor
    * @param {Object} props
    */
@@ -29,8 +30,9 @@ export default class Headline extends React.Component {
   }
 
   /**
-   * componentDidMount
+   * @description componentDidMount
    * @method
+   * @memberOf Headline
    * @returns {void}
    */
   componentDidMount() {
@@ -39,8 +41,9 @@ export default class Headline extends React.Component {
   }
 
   /**
-   * componentWillUnmount
+   * @description componentWillUnmount
    * @method
+   * @memberOf Headline
    * @returns {void}
    */
   componentWillUnmount() {
@@ -48,8 +51,9 @@ export default class Headline extends React.Component {
   }
 
   /**
-   * getHeadlines: sets the state with the fetched headlines.
+   * @description sets the state with the fetched headlines.
    * @method
+   * @memberOf Headline
    * @returns {void}
    */
   getHeadlines() {
@@ -59,8 +63,9 @@ export default class Headline extends React.Component {
   }
 
   /**
-   * render
+   * @description renders the Headlines
    * @method
+   * @memberOf Headline
    * @returns {Card} Card
    */
   render() {

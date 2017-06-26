@@ -10,7 +10,7 @@ import dispatcher from '../dispatcher';
  */
 class HeadlineStore extends EventEmitter {
   /**
-   * Represents a headline.
+   * @description Creates an instance of HeadlineStore.
    * @constructor
    */
   constructor() {
@@ -24,7 +24,9 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * getAll: returns all headlines
+   * @description returns all headlines
+   * @method
+   * @memberOf HeadlineStore
    * @returns {Array} headlines
    */
   getAll() {
@@ -32,7 +34,9 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * getSourceKey: returns all sources
+   * @description returns all sources
+   * @method
+   * @memberOf HeadlineStore
    * @returns {string} sourceKey
    */
   getSourceKey() {
@@ -40,7 +44,9 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * setHeadlines: assigns headlines and emits an event
+   * @description assigns headlines and emits an event
+   * @method
+   * @memberOf HeadlineStore
    * @param {Array} headlines The headlines fetched for a given source
    * @returns {void}
    */
@@ -50,7 +56,9 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * setSourceKey: sets the sourceKey
+   * @description sets the sourceKey
+   * @method
+   * @memberOf HeadlineStore
    * @param {string} sourceKey The news source id
    * @returns {void}
    */
@@ -60,7 +68,9 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * handleActions switches between actions and handle them accordingly
+   * @description switches between actions and handle them accordingly
+   * @method
+   * @memberOf HeadlineStore
    * @param {Object} action The action type dispatched
    * @returns {void}
    */

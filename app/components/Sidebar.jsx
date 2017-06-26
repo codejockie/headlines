@@ -18,6 +18,8 @@ import SourceStore from '../stores/SourceStore';
  */
 export default class SourceSidebar extends Component {
   /**
+   * @description Creates an instance of SourcesSidebar
+   * @memberOf SourcesSidebar
    * @constructor
    * @param {Object} props
    */
@@ -44,8 +46,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * componentDidMount
+   * @description componentDidMount
    * @method
+   * @memberOf SourcesSidebar
    * @returns {void}
    */
   componentDidMount() {
@@ -54,8 +57,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * componentWillUnmount
+   * @description componentWillUnmount
    * @method
+   * @memberOf SourcesSidebar
    * @returns {void}
    */
   componentWillUnmount() {
@@ -63,8 +67,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * onChange: handles the sortBy filter, calling the loadHeadlines method.
+   * @description handles the sortBy filter, calling the loadHeadlines method.
    * @method
+   * @memberOf SourcesSidebar
    * @param {string} event The event properties
    * @param {string} data The event data
    * @returns {void}
@@ -77,8 +82,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * onLogout: initiates the logout process.
+   * @description initiates the logout process.
    * @method
+   * @memberOf SourcesSidebar
    * @returns {void}
    */
   onLogout() {
@@ -86,8 +92,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * getSources: sets the state of the component with that of the fetched sources.
+   * @description sets the state of the component with that of the fetched sources.
    * @method
+   * @memberOf SourcesSidebar
    * @returns {void}
    */
   getSources() {
@@ -100,8 +107,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * getOptions: sets the options
+   * @description sets the options
    * @method
+   * @memberOf SourcesSidebar
    * @param  {Object} sources The news sources
    * @returns {Array} sortBysAvailable The list of available sort options
    */
@@ -118,8 +126,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * handleClick: click handler for changing the currently selected source to a different source
+   * @description click handler for changing the currently selected source to a different source
    * @method
+   * @memberOf SourcesSidebar
    * @param {string} sourceId The news source id
    * @param {Array} sortBysAvailable The list of available sort options
    * @returns {void}
@@ -137,8 +146,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * toggleVisibility: hides/shows the sources sidebar
+   * @description hides/shows the sources sidebar
    * @method
+   * @memberOf SourcesSidebar
    * @returns {void}
    */
   toggleVisibility() {
@@ -146,8 +156,9 @@ export default class SourceSidebar extends Component {
   }
 
   /**
-   * render
+   * @description renders the sources
    * @method
+   * @memberOf SourcesSidebar
    * @returns {div} div
    */
   render() {

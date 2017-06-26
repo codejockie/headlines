@@ -8,12 +8,13 @@ import loadSources from '../actions/SourceActions';
 import SourceStore from '../stores/SourceStore';
 
 /**
- * Login Component
- * @class
+ * @class Login
  * @extends React.Component
  */
 export default class Login extends Component {
   /**
+   * @description Creates an instance of Login
+   * @memberOf Login
    * @constructor
    * @param {Object} props
    */
@@ -31,8 +32,9 @@ export default class Login extends Component {
   }
 
   /**
-   * componentDidMount
+   * @description componentDidMount
    * @method
+   * @memberOf Login
    * @returns {void}
    */
   componentDidMount() {
@@ -41,8 +43,9 @@ export default class Login extends Component {
   }
 
   /**
-   * componentWillUnmount
+   * @description componentWillUnmount
    * @method
+   * @memberOf Login
    * @returns {void}
    */
   componentWillUnmount() {
@@ -50,8 +53,9 @@ export default class Login extends Component {
   }
 
   /**
-   * getSources: sets the state of the component with that of the fetched sources.
+   * @description sets the state of the component with that of the fetched sources.
    * @method
+   * @memberOf Login
    * @returns {void}
    */
   getSources() {
@@ -70,8 +74,9 @@ export default class Login extends Component {
   }
 
   /**
-   * onChange: sets the default news source
+   * @description sets the default news source
    * @method
+   * @memberOf Login
    * @param {Object} event The event properties
    * @param {Object} data The event data
    * @returns {void}
@@ -85,8 +90,9 @@ export default class Login extends Component {
   }
 
   /**
-   * onLogin: passed an auth provider, it initiates the auth process for the supplied provider
+   * @description passed an auth provider, it initiates the auth process for the supplied provider
    * @method
+   * @memberOf Login
    * @param {Object} authProvider The authentication provider to use
    * @returns {void}
    */
@@ -95,8 +101,9 @@ export default class Login extends Component {
   }
 
   /**
-   * render
+   * @description renders the Login component
    * @method
+   * @memberOf Login
    * @returns {Grid} Grid
    */
   render() {

@@ -10,7 +10,8 @@ import dispatcher from '../dispatcher';
  */
 class SourceStore extends EventEmitter {
   /**
-   * Represents a source.
+   * @description Represents a source.
+   * @memberOf SourceStore
    * @constructor
    */
   constructor() {
@@ -21,7 +22,9 @@ class SourceStore extends EventEmitter {
   }
 
   /**
-   * getAll: returns all sources
+   * @description returns all sources
+   * @method
+   * @memberOf SourceStore
    * @returns {Array} sources
    */
   getAll() {
@@ -29,7 +32,9 @@ class SourceStore extends EventEmitter {
   }
 
   /**
-   * setSources: assigns sources and emits an event
+   * @description assigns sources and emits an event
+   * @method
+   * @memberOf SourceStore
    * @param {Array} sources The fetched news sources
    * @returns {void}
    */
@@ -39,7 +44,9 @@ class SourceStore extends EventEmitter {
   }
 
   /**
-   * handleActions: switches between actions and handle them accordingly
+   * @description switches between actions and handle them accordingly
+   * @method
+   * @memberOf SourceStore
    * @param {Object} action The action type dispatched
    * @returns {void}
    */

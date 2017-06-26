@@ -10,7 +10,8 @@ import dispatcher from '../dispatcher';
  */
 class ArticleStore extends EventEmitter {
   /**
-   * Represents an article.
+   * @description Creates an instance of ArticleStore.
+   * @memberOf ArticleStore
    * @constructor
    */
   constructor() {
@@ -24,7 +25,9 @@ class ArticleStore extends EventEmitter {
   }
 
   /**
-   * getParsedArticle: returns article
+   * @description returns article
+   * @method
+   * @memberOf ArticleStore
    * @returns {Object} article
    */
   getParsedArticle() {
@@ -32,7 +35,9 @@ class ArticleStore extends EventEmitter {
   }
 
   /**
-   * getUrl: returns the url for scraping
+   * @description returns the url for scraping
+   * @method
+   * @memberOf ArticleStore
    * @returns {string} url
    */
   getUrl() {
@@ -40,7 +45,9 @@ class ArticleStore extends EventEmitter {
   }
 
   /**
-   * setArticleUrl: returns article
+   * @description returns article
+   * @method
+   * @memberOf ArticleStore
    * @param {string} url The url to the article to scraped
    * @returns {string} url
    */
@@ -49,7 +56,9 @@ class ArticleStore extends EventEmitter {
   }
 
   /**
-   * handleActions: switches between actions and handle them accordingly
+   * @description switches between actions and handle them accordingly
+   * @method
+   * @memberOf ArticleStore
    * @param {Object} action The type of action dispatched
    * @returns {void}
    */
