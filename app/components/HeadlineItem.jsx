@@ -6,8 +6,8 @@ import formatDate from '../helpers/DateFormatter';
 import { setArticleUrl } from '../actions/ArticleActions';
 
 /**
- * HeadlineItem is a stateless component function.
- * @constructor
+ * @description renders the individual headlines
+ * @constructor HeadlineItem
  * @param {string} title The title of the article
  * @param {string} description The article's description
  * @param {string} url The url to the article
@@ -17,7 +17,9 @@ import { setArticleUrl } from '../actions/ArticleActions';
  */
 export default function HeadlineItem({ description, publishedAt, title, url, urlToImage }) {
   /**
-   * onClick: handles the navigation to the Article component
+   * @description handles the navigation to the Article component
+   * @function
+   * @memberOf HeadlineItem
    * @param {Object} event The event properties
    * @return {void}
    */

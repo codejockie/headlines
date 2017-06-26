@@ -14,8 +14,10 @@ const {
 } = ShareButtons;
 
 /**
- * ShareIcon is a stateless component function.
+ * @description provides social media share features
  * @function
+ * @param {string} url The url to the article to share
+ * @param {string} title The title to the article to share
  * @returns {div} div
  */
 export default function ShareIcon({ url, title }) {

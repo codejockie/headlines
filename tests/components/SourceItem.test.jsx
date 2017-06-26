@@ -43,10 +43,11 @@ describe('<SourceItem />', () => {
       expect(wrapper.find('a').text()).to.equal('ABC News (AU)');
     });
 
-    it('should have props for name and id', () => {
+    it('should have props for name, id and sortBysAvailable', () => {
       const wrapper = shallow(<SourceItem {...sources} />);
       expect(wrapper.props().name).to.be.defined;
       expect(wrapper.props().id).to.be.defined;
+      expect(wrapper.props().sortBysAvailable).to.be.defined;
     });
   });
 });

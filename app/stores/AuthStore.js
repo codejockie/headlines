@@ -10,7 +10,8 @@ import dispatcher from '../dispatcher';
  */
 class LoginStore extends EventEmitter {
   /**
-   * Represents login.
+   * @description Creates an instance of LoginStore.
+   * @memberOf LoginStore
    * @constructor
    */
   constructor() {
@@ -24,7 +25,9 @@ class LoginStore extends EventEmitter {
   }
 
   /**
-   * getUserId: returns userId
+   * @description returns userId
+   * @method
+   * @memberOf LoginStore
    * @param {string} userId The currently logged in user's id
    * @returns {string} userId
    */
@@ -34,7 +37,9 @@ class LoginStore extends EventEmitter {
   }
 
   /**
-   * setUser: sets the user
+   * @description sets the user
+   * @method
+   * @memberOf LoginStore
    * @param {Object} user The currently logged in user
    * @returns {void}
    */
@@ -44,7 +49,9 @@ class LoginStore extends EventEmitter {
   }
 
   /**
-   * clearAll: clears user's data and localStorage on logout
+   * @description clears user's data and localStorage on logout
+   * @method
+   * @memberOf LoginStore
    * @returns {void}
    */
   clearAll() {
@@ -55,7 +62,9 @@ class LoginStore extends EventEmitter {
   }
 
   /**
-   * handleActions: switches between actions and handle them accordingly
+   * @description switches between actions and handle them accordingly
+   * @method
+   * @memberOf LoginStore
    * @param {Object} action The action type dispatched
    * @returns {void}
    */

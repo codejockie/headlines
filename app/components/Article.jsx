@@ -25,6 +25,8 @@ const alertOptions = {
  */
 export default class Article extends Component {
   /**
+   * @description Creates an instance of Article
+   * @memberOf Article
    * @constructor
    * @param {Object} props Properties of the class
    */
@@ -43,8 +45,9 @@ export default class Article extends Component {
   }
 
   /**
-   * componentDidMount
+   * @description componentDidMount
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   componentDidMount() {
@@ -58,8 +61,9 @@ export default class Article extends Component {
   }
 
   /**
-   * componentWillUnmount
+   * @description componentWillUnmount
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   componentWillUnmount() {
@@ -67,8 +71,9 @@ export default class Article extends Component {
   }
 
   /**
-   * getArticle: sets the state with the scraped article.
+   * @description sets the state with the scraped article.
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   getArticle() {
@@ -78,8 +83,9 @@ export default class Article extends Component {
   }
 
   /**
-   * setUser: sets the state for userId.
+   * @description sets the state for userId.
    * @method
+   * @memberOf Article
    * @param {Object} user The user object from the AuthStore
    * @returns {void}
    */
@@ -90,8 +96,9 @@ export default class Article extends Component {
   }
 
   /**
-   * handleClick: redirects back to the headlines route.
+   * @description redirects back to the headlines route.
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   onClick() {
@@ -99,8 +106,9 @@ export default class Article extends Component {
   }
 
   /**
-   * showAlert: shows alert when an article is saved.
+   * @description shows alert when an article is saved.
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   showAlert() {
@@ -108,8 +116,9 @@ export default class Article extends Component {
   }
 
   /**
-   * storeArticle: saves scraped article to the DB.
+   * @description saves scraped article to the DB.
    * @method
+   * @memberOf Article
    * @returns {void}
    */
   storeArticle() {
@@ -138,8 +147,9 @@ export default class Article extends Component {
   }
 
   /**
-   * render
+   * @description renders the articles
    * @method
+   * @memberOf Article
    * @returns {span} span
    */
   render() {
