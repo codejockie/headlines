@@ -1,6 +1,7 @@
 import SourceStore from '../../app/stores/SourceStore';
 import sampleSources from '../../mock/sampleSources.json';
 import dispatcher from '../../app/dispatcher';
+import { SOURCES } from '../../app/constants';
 
 
 describe('Source Store', () => {
@@ -18,7 +19,7 @@ describe('Source Store', () => {
   it('projects correct state from actions', () => {
     // Dispatch actions.
     dispatcher.dispatch({
-      type: 'RECEIVE_SOURCES',
+      type: SOURCES,
       sources: sampleSources
     });
 
