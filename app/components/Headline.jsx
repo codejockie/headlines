@@ -11,7 +11,7 @@ import HeadlineStore from '../stores/HeadlineStore';
  */
 export default class Headline extends React.Component {
   /**
-   * @description Creates an instance of Headline
+   * Creates an instance of Headline
    * @memberOf Headline
    * @constructor
    * @param {Object} props
@@ -19,70 +19,99 @@ export default class Headline extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getHeadlines = this.getHeadlines.bind(this);
+    this.setHeadlines = this.setHeadlines.bind(this);
+    this.setError = this.setError.bind(this);
+    this.renderHeadlines = this.renderHeadlines.bind(this);
 
     /** @type {string} */
     this.sourceKey = HeadlineStore.getSourceKey() || localStorage.getItem('sourceKey');
 
     this.state = {
+      error: '',
       headlines: null,
     };
   }
 
   /**
-   * @description componentDidMount
+   * componentDidMount
    * @method
    * @memberOf Headline
    * @returns {void}
    */
   componentDidMount() {
     loadHeadlines(this.sourceKey);
-    HeadlineStore.on('headline_change', this.getHeadlines);
+    HeadlineStore.on('headline_change', this.setHeadlines);
+    HeadlineStore.on('headline_error', this.setError);
   }
 
   /**
-   * @description componentWillUnmount
+   * componentWillUnmount
    * @method
    * @memberOf Headline
    * @returns {void}
    */
   componentWillUnmount() {
-    HeadlineStore.removeListener('headline_change', this.getHeadlines);
+    HeadlineStore.removeListener('headline_change', this.setHeadlines);
+    HeadlineStore.removeListener('headline_error', this.setError);
   }
 
   /**
-   * @description sets the state with the fetched headlines.
+   * sets the state with the fetched headlines.
    * @method
    * @memberOf Headline
    * @returns {void}
    */
-  getHeadlines() {
+  setHeadlines() {
     this.setState({
-      headlines: HeadlineStore.getAll(),
+      headlines: HeadlineStore.getHeadlines(),
     });
   }
 
   /**
-   * @description renders the Headlines
+   * sets the error state if an error occurred.
+   * @method
+   * @memberOf Headline
+   * @returns {void}
+   */
+  setError() {
+    this.setState({
+      error: HeadlineStore.getError()
+    });
+  }
+
+  /**
+   * returns an array of HeadlineItem component.
+   * @method
+   * @memberOf Headline
+   * @param {Array} headlines - array of headlines to be mapped over
+   * @returns {Array} HeadlineItem
+   */
+  renderHeadlines(headlines) {
+    return headlines.map(article => <HeadlineItem key={article.url} {...article} />);
+  }
+
+  /**
+   * renders the Headlines
    * @method
    * @memberOf Headline
    * @returns {Card} Card
    */
   render() {
-    const { headlines } = this.state;
+    const { error, headlines } = this.state;
 
     return (
-      <Card.Group>
+      <div>
+        {error ? <div>{error}</div> : undefined}
+
         {
-          headlines
-            ? headlines.map(article => <HeadlineItem key={article.url} {...article} />)
+          headlines ? <Card.Group>{this.renderHeadlines(headlines)}</Card.Group>
             : (
               <Dimmer active inverted>
-                <Loader size="large" inline="centered">Loading</Loader>
+                <Loader size="large" inline="centered">Loading...</Loader>
               </Dimmer>
           )
         }
-      </Card.Group>
+      </div>
     );
   }
 }

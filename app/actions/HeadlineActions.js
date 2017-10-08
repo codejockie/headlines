@@ -1,5 +1,6 @@
 import dispatcher from '../dispatcher';
 import { getHeadlines } from '../api/NewsApi';
+import { HEADLINES, HEADLINES_ERROR, SOURCE_KEY } from '../constants';
 
 /**
  * loadHeadlines: retrieves headlines based on supplied source id and sort.
@@ -9,17 +10,19 @@ import { getHeadlines } from '../api/NewsApi';
  * @returns {Promise} Promise
  */
 export default function loadHeadlines(sourceKey, sortBy = 'top') {
-  return getHeadlines(sourceKey, sortBy).then((headlines) => {
-    dispatcher.dispatch({
-      type: 'RECEIVE_HEADLINES',
-      headlines,
-    }, (error) => {
+  return getHeadlines(sourceKey, sortBy)
+    .then((headlines) => {
       dispatcher.dispatch({
-        type: 'RECEIVE_HEADLINES_ERROR',
+        type: HEADLINES,
+        headlines,
+      });
+    })
+    .catch((error) => {
+      dispatcher.dispatch({
+        type: HEADLINES_ERROR,
         error,
       });
     });
-  });
 }
 
 /**
@@ -30,7 +33,7 @@ export default function loadHeadlines(sourceKey, sortBy = 'top') {
  */
 export function setSourceKey(sourceKey) {
   dispatcher.dispatch({
-    type: 'SOURCE_KEY',
+    type: SOURCE_KEY,
     sourceKey,
   });
 }

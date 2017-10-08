@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ShareButtons, generateShareIcon } from 'react-share';
 
 const FacebookIcon = generateShareIcon('facebook');
@@ -62,3 +63,8 @@ export default function ShareIcon({ url, title }) {
     </div>
   );
 }
+
+ShareIcon.propTypes = {
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+};

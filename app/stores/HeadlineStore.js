@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 
 import dispatcher from '../dispatcher';
+import { HEADLINES, HEADLINES_ERROR, SOURCE_KEY } from '../constants';
 
 /**
  * Headline Store Class.
@@ -10,7 +11,7 @@ import dispatcher from '../dispatcher';
  */
 class HeadlineStore extends EventEmitter {
   /**
-   * @description Creates an instance of HeadlineStore.
+   * Creates an instance of HeadlineStore.
    * @constructor
    */
   constructor() {
@@ -21,20 +22,33 @@ class HeadlineStore extends EventEmitter {
 
     /** @type {string} */
     this.sourceKey = '';
+
+    /** @type {string} */
+    this.error = '';
   }
 
   /**
-   * @description returns all headlines
+   * returns all headlines
    * @method
    * @memberOf HeadlineStore
    * @returns {Array} headlines
    */
-  getAll() {
+  getHeadlines() {
     return this.headlines;
   }
 
   /**
-   * @description returns all sources
+   * returns error
+   * @method
+   * @memberOf HeadlineStore
+   * @returns {String} error
+   */
+  getError() {
+    return this.error;
+  }
+
+  /**
+   * returns all sources
    * @method
    * @memberOf HeadlineStore
    * @returns {string} sourceKey
@@ -44,7 +58,7 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * @description assigns headlines and emits an event
+   * assigns headlines and emits an event
    * @method
    * @memberOf HeadlineStore
    * @param {Array} headlines The headlines fetched for a given source
@@ -56,7 +70,19 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * @description sets the sourceKey
+   * assigns error and emits an event
+   * @method
+   * @memberOf HeadlineStore
+   * @param {string} error Error that occur while fetching data if any
+   * @returns {void}
+   */
+  setError(error) {
+    this.error = error;
+    this.emit('headline_error');
+  }
+
+  /**
+   * sets the sourceKey
    * @method
    * @memberOf HeadlineStore
    * @param {string} sourceKey The news source id
@@ -68,7 +94,7 @@ class HeadlineStore extends EventEmitter {
   }
 
   /**
-   * @description switches between actions and handle them accordingly
+   * switches between actions and handle them accordingly
    * @method
    * @memberOf HeadlineStore
    * @param {Object} action The action type dispatched
@@ -76,10 +102,13 @@ class HeadlineStore extends EventEmitter {
    */
   handleActions(action) {
     switch (action.type) {
-      case 'RECEIVE_HEADLINES':
+      case HEADLINES:
         this.setHeadlines(action.headlines);
         break;
-      case 'SOURCE_KEY':
+      case HEADLINES_ERROR:
+        this.setError(action.error);
+        break;
+      case SOURCE_KEY:
         this.setSourceKey(action.sourceKey);
         break;
 
