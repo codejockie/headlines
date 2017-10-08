@@ -12,6 +12,7 @@ try {
 
 module.exports = {
   entry: [
+    'webpack-hot-middleware/client',
     './app/app.jsx',
   ],
   externals: {
@@ -23,16 +24,17 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'client'),
     filename: 'bundle.js',
-    publicPath: '/client',
+    publicPath: '/',
     sourceMapFilename: 'bundle.map',
   },
-  devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map',
+  devtool: process.env.NODE_ENV === 'production'
+    ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
   resolve: {
     modules: ['node_modules', './app/components'],
     extensions: ['.js', '.jsx'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.js$|\.jsx$)/,
         exclude: /(node_modules|bower_components)/,
@@ -52,6 +54,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',

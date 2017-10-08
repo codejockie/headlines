@@ -36,7 +36,7 @@ describe('<HeadlineItem />', () => {
 
   it('should have an anchor element with its text attr set', () => {
     const wrapper = mount(<HeadlineItem {...article} />);
-    expect(wrapper.find('a').text()).to.equal('Read from source');
+    expect(wrapper.find('a').text()).to.equal('Go to source');
     expect(wrapper.find('button').text()).to.equal('Read here');
   });
 });

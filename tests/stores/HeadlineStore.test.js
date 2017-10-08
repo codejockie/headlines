@@ -1,6 +1,7 @@
 import HeadlineStore from '../../app/stores/HeadlineStore';
 import sampleHeadlines from '../../mock/sampleHeadlines.json';
 import dispatcher from '../../app/dispatcher';
+import { HEADLINES } from '../../app/constants';
 
 describe('Headline Store', () => {
   let mockSetHeadlines;
@@ -17,7 +18,7 @@ describe('Headline Store', () => {
   it('projects correct state from actions', () => {
     // Dispatch actions.
     dispatcher.dispatch({
-      type: 'RECEIVE_HEADLINES',
+      type: HEADLINES,
       headlines: sampleHeadlines
     });
 

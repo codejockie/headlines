@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Menu } from 'semantic-ui-react';
 
 /**
@@ -18,7 +19,7 @@ export default function SourceItem({ id, name, onClick, sortBysAvailable }) {
    * @param {Object} event The event properties
    * @returns {void}
    */
-  const clicked = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
     const sourceId = event.target.getAttribute('href');
     onClick(sourceId, sortBysAvailable);
@@ -26,9 +27,16 @@ export default function SourceItem({ id, name, onClick, sortBysAvailable }) {
 
   return (
     <Menu.Item name={name}>
-      <a href={`${id}`} onClick={clicked}>
+      <a href={`${id}`} onClick={handleClick}>
         {name}
       </a>
     </Menu.Item>
   );
 }
+
+SourceItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  sortBysAvailable: PropTypes.array.isRequired
+};

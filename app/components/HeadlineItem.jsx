@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Card, Image } from 'semantic-ui-react';
 import { hashHistory } from 'react-router';
 
@@ -6,7 +7,7 @@ import formatDate from '../helpers/DateFormatter';
 import { setArticleUrl } from '../actions/ArticleActions';
 
 /**
- * @description renders the individual headlines
+ * renders the individual headlines
  * @constructor HeadlineItem
  * @param {string} title The title of the article
  * @param {string} description The article's description
@@ -17,7 +18,7 @@ import { setArticleUrl } from '../actions/ArticleActions';
  */
 export default function HeadlineItem({ description, publishedAt, title, url, urlToImage }) {
   /**
-   * @description handles the navigation to the Article component
+   * handles the navigation to the Article component
    * @function
    * @memberOf HeadlineItem
    * @param {Object} event The event properties
@@ -51,10 +52,18 @@ export default function HeadlineItem({ description, publishedAt, title, url, url
         <div className="ui two buttons">
           <Button basic color="green" onClick={onClick}>Read here</Button>
           <a href={url} target="_blank" rel="noopener noreferrer" className="ui button">
-            Read from source
+            Go to source
           </a>
         </div>
       </Card.Content>
     </Card>
   );
 }
+
+HeadlineItem.propTypes = {
+  description: PropTypes.string.isRequired,
+  publishedAt: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  urlToImage: PropTypes.string.isRequired
+};

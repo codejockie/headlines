@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 
 import dispatcher from '../dispatcher';
+import { SOURCES, SOURCES_ERROR } from '../constants';
 
 /**
  * Source Store Class.
@@ -19,6 +20,9 @@ class SourceStore extends EventEmitter {
 
     /** @type {Array} */
     this.sources = [];
+
+    /** @type {string} */
+    this.error = '';
   }
 
   /**
@@ -44,6 +48,18 @@ class SourceStore extends EventEmitter {
   }
 
   /**
+   * assigns error and emits an event
+   * @method
+   * @memberOf SourceStore
+   * @param {string} error Error that occur while fetching data if any
+   * @returns {void}
+   */
+  setError(error) {
+    this.error = error;
+    this.emit('error');
+  }
+
+  /**
    * @description switches between actions and handle them accordingly
    * @method
    * @memberOf SourceStore
@@ -52,8 +68,11 @@ class SourceStore extends EventEmitter {
    */
   handleActions(action) {
     switch (action.type) {
-      case 'RECEIVE_SOURCES':
+      case SOURCES:
         this.setSources(action.sources);
+        break;
+      case SOURCES_ERROR:
+        this.setError(action.error);
         break;
 
       default: break;

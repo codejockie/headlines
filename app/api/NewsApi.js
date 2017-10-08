@@ -21,8 +21,7 @@ const makeRequest = (path, lang, sourceKey, sortBy) => {
     requestUrl += `${path}?language=${lang}`;
   }
 
-  return axios.get(requestUrl)
-    .then(response => response.data, response => response.data);
+  return axios.get(requestUrl);
 };
 
 /**
@@ -31,7 +30,8 @@ const makeRequest = (path, lang, sourceKey, sortBy) => {
  * @returns {Promise} Promise
  */
 export const getSources = () => makeRequest('sources', 'en', undefined, undefined)
-  .then(response => response.sources, error => error);
+  .then(response => response.data.sources)
+  .catch(error => error.data);
 
 /**
  * getHeadlines: retrieves the headlines from the API
@@ -42,4 +42,5 @@ export const getSources = () => makeRequest('sources', 'en', undefined, undefine
  */
 export const getHeadlines =
   (sourceKey, sortBy = 'top') => makeRequest('articles', undefined, sourceKey, sortBy)
-    .then(response => response.articles, error => error);
+    .then(response => response.data.articles)
+    .catch(error => error.data);
