@@ -28,7 +28,7 @@ module.exports = {
     sourceMapFilename: 'bundle.map',
   },
   devtool: process.env.NODE_ENV === 'production'
-    ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
+    ? undefined : 'cheap-module-eval-source-map',
   resolve: {
     modules: ['node_modules', './app/components'],
     extensions: ['.js', '.jsx'],
