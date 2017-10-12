@@ -62,7 +62,7 @@ export default function HeadlineItem({ description, publishedAt, title, url, url
 
 HeadlineItem.propTypes = {
   description: PropTypes.string.isRequired,
-  publishedAt: PropTypes.string.isRequired,
+  publishedAt: PropTypes.string,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   urlToImage: PropTypes.string.isRequired
