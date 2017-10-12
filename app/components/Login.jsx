@@ -3,7 +3,6 @@ import { Grid, Button, Dropdown, Icon, Segment, Header, Divider } from 'semantic
 
 import { githubProvider, googleProvider } from '../firebase/index';
 import { startLogin } from '../actions/AuthActions';
-import { setSourceKey } from '../actions/HeadlineActions';
 import loadSources from '../actions/SourceActions';
 import SourceStore from '../stores/SourceStore';
 
@@ -13,86 +12,51 @@ import SourceStore from '../stores/SourceStore';
  */
 export default class Login extends Component {
   /**
-   * @description Creates an instance of Login
-   * @memberOf Login
+   * Creates an instance of Login
    * @constructor
    * @param {Object} props
    */
   constructor(props) {
     super(props);
 
-    this.state = {
-      sources: null,
-      isFetching: true,
-      disabled: true,
-    };
-
-    this.getSources = this.getSources.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.setSourceKey = this.setSourceKey.bind(this);
   }
 
   /**
-   * @description componentDidMount
+   * componentDidMount
    * @method
-   * @memberOf Login
    * @returns {void}
    */
   componentDidMount() {
     loadSources();
-    SourceStore.on('source_change', this.getSources);
+    SourceStore.on('source_change', this.setSourceKey);
   }
 
   /**
-   * @description componentWillUnmount
+   * componentWillUnmount
    * @method
-   * @memberOf Login
    * @returns {void}
    */
   componentWillUnmount() {
-    SourceStore.removeListener('source_change', this.getSources);
+    SourceStore.removeListener('source_change', this.setSourceKey);
   }
 
   /**
-   * @description sets the state of the component with that of the fetched sources.
+   * randomly selects a source from all sources list and sets it in local storage.
    * @method
-   * @memberOf Login
    * @returns {void}
    */
-  getSources() {
-    let sources = SourceStore.getAll();
-    sources = sources.map(source => (
-      {
-        key: source.id,
-        text: source.name,
-        value: source.id,
-      }
-    ));
-    this.setState({
-      sources,
-      isFetching: false,
-    });
+  setSourceKey() {
+    if (!localStorage.sourceKey) {
+      const sources = SourceStore.getAll();
+      const sourceIndex = Math.floor((Math.random() * sources.length) + 1);
+      localStorage.sourceKey = sources[sourceIndex].id;
+    }
   }
 
   /**
-   * @description sets the default news source
+   * passed an auth provider, it initiates the auth process for the supplied provider
    * @method
-   * @memberOf Login
-   * @param {Object} event The event properties
-   * @param {Object} data The event data
-   * @returns {void}
-   */
-  onChange(event, data) {
-    event.preventDefault();
-    this.setState({
-      disabled: false,
-    });
-    setSourceKey(data.value);
-  }
-
-  /**
-   * @description passed an auth provider, it initiates the auth process for the supplied provider
-   * @method
-   * @memberOf Login
    * @param {Object} authProvider The authentication provider to use
    * @returns {void}
    */
@@ -101,26 +65,15 @@ export default class Login extends Component {
   }
 
   /**
-   * @description renders the Login component
+   * renders the Login component
    * @method
-   * @memberOf Login
    * @returns {Grid} Grid
    */
   render() {
-    const { disabled, isFetching, sources } = this.state;
     return (
       <Grid centered columns={4}>
         <Grid.Column>
-          <div className="content">
-            <Dropdown
-              fluid
-              search
-              options={sources}
-              placeholder='Select News Source'
-              onChange={this.onChange}
-              disabled={isFetching}
-              loading={isFetching}
-            />
+          <div className="login-container">
             <Segment>
               <Header as="h1" textAlign="center">Newslines</Header>
               <Header as="h2" icon textAlign="center">
@@ -128,7 +81,6 @@ export default class Login extends Component {
               </Header>
               <Divider section hidden />
               <Button color="google plus"
-                      disabled={disabled}
                       fluid
                       onClick={this.onLogin.bind(null, googleProvider)}>
                 <Icon name="google plus" />
@@ -136,7 +88,6 @@ export default class Login extends Component {
               </Button>
               <Divider horizontal>Or</Divider>
               <Button color="green"
-                      disabled={disabled}
                       fluid
                       onClick={this.onLogin.bind(null, githubProvider)}>
                 <Icon name="github" />
